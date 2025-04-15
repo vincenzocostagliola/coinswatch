@@ -1,4 +1,8 @@
 package dev.vincenzocostagliola.data.net.repository
 
-class RepositoryImpl : Repository {
+import dev.vincenzocostagliola.data.net.service.CoinsService
+
+internal class RepositoryImpl(
+    private val coinsService: CoinsService
+) : Repository {
 }
