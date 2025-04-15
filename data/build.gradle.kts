@@ -8,6 +8,7 @@ plugins {
 android {
     namespace = "dev.vincenzocostagliola.data"
     testNamespace = "dev.vincenzocostagliola.data"
+    compileSdk = 35
 }
 
 dependencies {
