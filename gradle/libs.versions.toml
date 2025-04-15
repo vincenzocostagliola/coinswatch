@@ -18,7 +18,7 @@ threeTen = "1.6.1"
 #Network
 retrofit = "2.9.0"
 okhttp = "4.10.0"
-kspVersion ="2.1.20-1.0.32"
+kspVersion ="2.0.21-1.0.28"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
