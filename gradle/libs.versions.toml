@@ -18,6 +18,7 @@ threeTen = "1.6.1"
 #Network
 retrofit = "2.9.0"
 okhttp = "4.10.0"
+kspVersion ="2.1.20-1.0.32"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -39,8 +40,8 @@ material = { group = "com.google.android.material", name = "material", version.r
 kotlin-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlin-serialization" }
 sandwich = { module = "com.github.skydoves:sandwich", version.ref = "sandwich" }
 timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
-hilt = { module = "com.google.dagger:hilt-android", version.ref = "dagger_hilt" }
-hilt_compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "dagger_hilt" }
+hilt = { group = "com.google.dagger", name="hilt-android", version.ref = "dagger_hilt" }
+hilt_compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "dagger_hilt" }
 #DATE TIME
 threeTen = { module = "org.threeten:threetenbp", version.ref = "threeTen" }
 
@@ -64,4 +65,5 @@ kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "ko
 android-library = { id = "com.android.library", version.ref = "agp" }
 dagger_hilt = { id = "com.google.dagger.hilt.android", version.ref = "dagger_hilt" }
 kotlin_kapt = { id = "org.jetbrains.kotlin.kapt:org.jetbrains.kotlin.kapt.gradle.plugin", version.ref = "kotlin" }
+ksp = {id ="com.google.devtools.ksp", version.ref = "kspVersion"}
 
