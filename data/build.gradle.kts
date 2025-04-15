@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "dev.vincenzocostagliola.data"
-    testNamespace = "dev.vincenzocostagliola.data"
+    testNamespace = "dev.vincenzocostagliola"
     compileSdk = 35
 }
 

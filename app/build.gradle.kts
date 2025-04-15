@@ -1,3 +1,9 @@
+@file:Suppress("DSL_SCOPE_VIOLATION")
+
+import com.android.build.api.dsl.Packaging
+
+//Because of https://github.com/gradle/gradle/issues/22797
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -30,15 +36,25 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = JavaVersion.VERSION_17.toString()
     }
     buildFeatures {
         compose = true
     }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.7"
+    }
+
+    fun Packaging.() {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
+    }
+
 }
 
 dependencies {
@@ -63,4 +79,7 @@ dependencies {
     implementation (libs.hilt)
     ksp(libs.hilt.compiler)
     implementation(libs.timber)
+
+    /**MODULES*/
+    implementation(project(":data"))
 }
