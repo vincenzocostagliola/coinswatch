@@ -12,7 +12,9 @@ import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 
@@ -52,10 +54,33 @@ class DataModule {
         val kotlinxConverterFactory = json.asConverterFactory(contentType)
 
         return Retrofit.Builder()
-            .baseUrl("BASEURL")
+            .baseUrl("https://api.coingecko.com/api/v3")
             .addCallAdapterFactory(ApiResponseCallAdapterFactory.create())
             .addConverterFactory(kotlinxConverterFactory)
             .client(client)
             .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideOkHttpClient(
+        loggingInterceptor: HttpLoggingInterceptor
+    ): OkHttpClient {
+        // This setup is for dev builds
+        //TODO production setup needs to be done
+        return OkHttpClient.Builder()
+            .writeTimeout(90, TimeUnit.SECONDS)
+            .readTimeout(90, TimeUnit.SECONDS)
+            .connectTimeout(90, TimeUnit.SECONDS)
+            .addInterceptor(loggingInterceptor)
+            .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
+        val interceptor = HttpLoggingInterceptor()
+        interceptor.level = HttpLoggingInterceptor.Level.BODY
+        return interceptor
     }
 }
