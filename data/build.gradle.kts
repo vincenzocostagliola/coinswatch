@@ -40,4 +40,8 @@ dependencies {
 
     /**DATE TIME*/
     implementation(libs.threeTen)
+    /**NETWORK*/
+    implementation(libs.bundles.network)
+    /**COROUTINES*/
+    implementation(libs.bundles.coroutines)
 }
