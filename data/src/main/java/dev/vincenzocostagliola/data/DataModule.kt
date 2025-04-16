@@ -55,7 +55,7 @@ class DataModule {
         val kotlinxConverterFactory = json.asConverterFactory(contentType)
 
         return Retrofit.Builder()
-            .baseUrl("https://api.coingecko.com/api/v3")
+            .baseUrl("https://api.coingecko.com/api/v3/")
             .addCallAdapterFactory(ApiResponseCallAdapterFactory.create())
             .addConverterFactory(kotlinxConverterFactory)
             .client(client)
