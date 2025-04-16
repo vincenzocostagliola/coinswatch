@@ -3,6 +3,7 @@ package dev.vincenzocostagliola.data.net.repository
 import com.skydoves.sandwich.suspendOnError
 import com.skydoves.sandwich.suspendOnException
 import com.skydoves.sandwich.suspendOnSuccess
+import dev.vincenzocostagliola.data.domain.result.GetCoinDataResult
 import dev.vincenzocostagliola.data.error.ErrorManagement
 import dev.vincenzocostagliola.data.domain.result.GetCoinsResult
 import dev.vincenzocostagliola.data.error.logErrorBasedOnCode
@@ -43,7 +44,24 @@ internal class RepositoryImpl(
         }
     }
 
-    override suspend fun getCoinData(coinId : String) : Flow<GetCoinDataResult>{
+    override suspend fun getCoinData(coinId: String): Flow<GetCoinDataResult> {
+        return flow {
+            val response = service.getCoinData(coinId)
 
+            response.suspendOnSuccess {
+                emit(GetCoinDataResult.Success(data.toDomain()))
+            }.suspendOnError {
+                this.logErrorBasedOnCode(
+                    netCallId = "getCoinData",
+                    request = ""
+                )
+                val error = errorManagement.manageOnError(this)
+                emit(GetCoinDataResult.Failure(error))
+            }.suspendOnException {
+                Timber.e("error: ${this.throwable}")
+                val error = errorManagement.manageOnException(this)
+                emit(GetCoinDataResult.Failure(error))
+            }
+        }
     }
 }
