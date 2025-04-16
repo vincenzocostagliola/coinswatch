@@ -45,7 +45,7 @@ class ErrorManagement @Inject constructor() {
 
     private fun manageHttpCodeError(errorCode: Int?): CoinSwatchError {
         Timber.Forest.d("CoinSwatchErrorManagement - Status : ${errorCode}")
-
+        //TODO add specific error code mapping based on feature/module
         return when (errorCode) {
             400 -> {
                 CoinSwatchError.ErrorBadRequest
