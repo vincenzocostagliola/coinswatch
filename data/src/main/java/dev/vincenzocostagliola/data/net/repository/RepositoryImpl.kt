@@ -4,15 +4,20 @@ import com.skydoves.sandwich.suspendOnError
 import com.skydoves.sandwich.suspendOnException
 import com.skydoves.sandwich.suspendOnSuccess
 import dev.vincenzocostagliola.data.domain.result.GetCoinsResult
+import dev.vincenzocostagliola.data.net.logErrorBasedOnCode
 import dev.vincenzocostagliola.data.net.service.CoinsService
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import timber.log.Timber
 
 internal class RepositoryImpl(
     private val service: CoinsService
 ) : Repository {
 
-    override suspend fun getCoinsWithMarketData(currency: String, howManyCoins: Int): Flow<GetCoinsResult> {
+    override suspend fun getCoinsWithMarketData(
+        currency: String,
+        howManyCoins: Int
+    ): Flow<GetCoinsResult> {
         return flow {
             val response = service.getCoinsWithMarketData(currency)
 
@@ -22,9 +27,16 @@ internal class RepositoryImpl(
                 val neededCoins = data.sortedBy { coin -> coin.marketCapRank }.take(howManyCoins)
                 emit(GetCoinsResult.Success(neededCoins.map { it.toDomain() }))
             }.suspendOnError {
-                emit()
+                this.logErrorBasedOnCode(
+                    netCallId = "getCoinsWithMarketData",
+                    request = ""
+                )
+                val error = errorManagement.manageOnError(this, NetIdError.Coins)
+                emit(GetCoinsResult.Failure(error))
             }.suspendOnException {
-                emit()
+                Timber.e("error: ${this.throwable}")
+                val error = errorManagement.manageOnException(this)
+                emit(GetCoinsResult.Failure(error))
             }
         }
     }
