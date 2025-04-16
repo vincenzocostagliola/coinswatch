@@ -1,6 +1,7 @@
 package dev.vincenzocostagliola.data
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import com.skydoves.sandwich.retrofit.adapters.ApiResponseCallAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -55,7 +56,7 @@ class DataModule {
 
         return Retrofit.Builder()
             .baseUrl("https://api.coingecko.com/api/v3")
-            //.addCallAdapterFactory(ApiResponseCallAdapterFactory.create())
+            .addCallAdapterFactory(ApiResponseCallAdapterFactory.create())
             .addConverterFactory(kotlinxConverterFactory)
             .client(client)
             .build()
