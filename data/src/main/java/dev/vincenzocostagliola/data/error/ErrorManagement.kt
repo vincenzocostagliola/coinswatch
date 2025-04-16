@@ -2,7 +2,7 @@ package dev.vincenzocostagliola.data.error
 
 import com.skydoves.sandwich.ApiResponse
 import com.skydoves.sandwich.retrofit.raw
-import dev.vincenzocostagliola.data.domain.result.CoinSwatchError
+import dev.vincenzocostagliola.data.error.CoinSwatchError
 import timber.log.Timber
 import java.net.ConnectException
 import java.net.SocketTimeoutException

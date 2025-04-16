@@ -1,4 +1,4 @@
-package dev.vincenzocostagliola.data.domain.result
+package dev.vincenzocostagliola.data.domain
 
 data class Coin(
     val ath: Int,

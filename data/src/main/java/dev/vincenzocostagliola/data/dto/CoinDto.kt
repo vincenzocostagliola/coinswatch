@@ -1,7 +1,7 @@
 package dev.vincenzocostagliola.data.dto
 
 
-import dev.vincenzocostagliola.data.domain.result.Coin
+import dev.vincenzocostagliola.data.domain.Coin
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
