@@ -93,6 +93,7 @@ data class CoinDto(
     @SerialName("total_volume")
     val totalVolume: Long
 ) {
+    //TODO improve domain mapping
     fun toDomain(): Coin {
         return Coin(
             ath = ath,
