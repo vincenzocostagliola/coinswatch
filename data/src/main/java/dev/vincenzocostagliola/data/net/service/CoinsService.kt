@@ -3,7 +3,7 @@ package dev.vincenzocostagliola.data.net.service
 import com.skydoves.sandwich.ApiResponse
 import dev.vincenzocostagliola.data.dto.CoinDataDto
 import dev.vincenzocostagliola.data.dto.CoinDto
-import dev.vincenzocostagliola.data.dto.CoinHistoricalData
+import dev.vincenzocostagliola.data.dto.CoinHistoricalDataDto
 import dev.vincenzocostagliola.data.net.NetHelper
 import retrofit2.http.GET
 import retrofit2.http.Headers
@@ -27,5 +27,5 @@ interface CoinsService {
         @Path("id") coinId: String,
         @Path("vs_currency") currency: String,
         @Path("days") days: Int
-    ): ApiResponse<List<CoinHistoricalData>>
+    ): ApiResponse<List<CoinHistoricalDataDto>>
 }

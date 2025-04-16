@@ -5,7 +5,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class CoinHistoricalData(
+data class CoinHistoricalDataDto(
     //TODO List<Double> means a list with only two double.
     //TODO the first represent a date
     //TODO the second represent price, money, whatelse
