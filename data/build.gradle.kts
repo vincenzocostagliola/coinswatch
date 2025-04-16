@@ -44,4 +44,5 @@ dependencies {
     implementation(libs.bundles.network)
     /**COROUTINES*/
     implementation(libs.bundles.coroutines)
+    implementation(libs.sandwich)
 }
