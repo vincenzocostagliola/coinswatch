@@ -32,11 +32,17 @@ class DataModule {
     @Singleton
     internal fun provideRepository(
         coinsService: CoinsService,
-        errorManagement : ErrorManagement
+        errorManagement: ErrorManagement
     ): Repository = RepositoryImpl(
         service = coinsService,
         errorManagement = errorManagement
     )
+
+    @Provides
+    @Singleton
+    internal fun provideErrorManagement(): ErrorManagement {
+        return ErrorManagement()
+    }
 
     @Provides
     @Singleton
