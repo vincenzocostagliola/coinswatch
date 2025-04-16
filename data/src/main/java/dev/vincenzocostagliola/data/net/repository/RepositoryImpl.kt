@@ -3,15 +3,17 @@ package dev.vincenzocostagliola.data.net.repository
 import com.skydoves.sandwich.suspendOnError
 import com.skydoves.sandwich.suspendOnException
 import com.skydoves.sandwich.suspendOnSuccess
+import dev.vincenzocostagliola.data.error.ErrorManagement
 import dev.vincenzocostagliola.data.domain.result.GetCoinsResult
-import dev.vincenzocostagliola.data.net.logErrorBasedOnCode
+import dev.vincenzocostagliola.data.error.logErrorBasedOnCode
 import dev.vincenzocostagliola.data.net.service.CoinsService
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import timber.log.Timber
 
 internal class RepositoryImpl(
-    private val service: CoinsService
+    private val service: CoinsService,
+    private val errorManagement: ErrorManagement
 ) : Repository {
 
     override suspend fun getCoinsWithMarketData(
@@ -31,7 +33,7 @@ internal class RepositoryImpl(
                     netCallId = "getCoinsWithMarketData",
                     request = ""
                 )
-                val error = errorManagement.manageOnError(this, NetIdError.Coins)
+                val error = errorManagement.manageOnError(this)
                 emit(GetCoinsResult.Failure(error))
             }.suspendOnException {
                 Timber.e("error: ${this.throwable}")

@@ -1,4 +1,4 @@
-package dev.vincenzocostagliola.data.net
+package dev.vincenzocostagliola.data.error
 
 import com.skydoves.sandwich.ApiResponse
 import com.skydoves.sandwich.retrofit.raw

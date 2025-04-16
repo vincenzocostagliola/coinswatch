@@ -6,6 +6,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import dev.vincenzocostagliola.data.error.ErrorManagement
 import dev.vincenzocostagliola.data.net.repository.Repository
 import dev.vincenzocostagliola.data.net.repository.RepositoryImpl
 import dev.vincenzocostagliola.data.net.service.CoinsService
@@ -30,9 +31,11 @@ class DataModule {
     @Provides
     @Singleton
     internal fun provideRepository(
-        coinsService: CoinsService
+        coinsService: CoinsService,
+        errorManagement : ErrorManagement
     ): Repository = RepositoryImpl(
-        coinsService = coinsService
+        service = coinsService,
+        errorManagement = errorManagement
     )
 
     @Provides
