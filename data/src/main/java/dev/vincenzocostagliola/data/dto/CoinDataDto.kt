@@ -1,6 +1,7 @@
 package dev.vincenzocostagliola.data.dto
 
 
+import dev.vincenzocostagliola.data.domain.CoinData
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -116,7 +117,7 @@ data class CoinDataDto(
         @SerialName("id")
         val id: String,
         @SerialName("it")
-        val `it`: String,
+        val it: String,
         @SerialName("ja")
         val ja: String,
         @SerialName("ko")
@@ -153,7 +154,11 @@ data class CoinDataDto(
         val zh: String,
         @SerialName("zh-tw")
         val zhTw: String
-    )
+    ) {
+        fun toDomain(): CoinData.Description {
+            return CoinData.Description()
+        }
+    }
 
     @Serializable
     data class DetailPlatforms(
@@ -209,7 +214,11 @@ data class CoinDataDto(
         val small: String,
         @SerialName("thumb")
         val thumb: String
-    )
+    ) {
+        fun toDomain(): CoinData.Image {
+            return CoinData.Image(large = large, small = small, thumb = thumb)
+        }
+    }
 
     @Serializable
     data class Links(
@@ -247,6 +256,10 @@ data class CoinDataDto(
             @SerialName("github")
             val github: List<String>
         )
+
+        fun toDomain(): CoinData.Links {
+            return CoinData.Links(homepage = homepage)
+        }
     }
 
     @Serializable
@@ -282,7 +295,7 @@ data class CoinDataDto(
         @SerialName("id")
         val id: String,
         @SerialName("it")
-        val `it`: String,
+        val it: String,
         @SerialName("ja")
         val ja: String,
         @SerialName("ko")
@@ -319,7 +332,11 @@ data class CoinDataDto(
         val zh: String,
         @SerialName("zh-tw")
         val zhTw: String
-    )
+    ) {
+        fun toDomain() : CoinData.Localization {
+            return CoinData.Localization()
+        }
+    }
 
     @Serializable
     data class MarketData(
@@ -3430,6 +3447,35 @@ data class CoinDataDto(
             val identifier: String,
             @SerialName("name")
             val name: String
+        )
+    }
+
+    fun toDomain(): CoinData {
+        return CoinData(
+            additionalNotices = additionalNotices,
+            assetPlatformId = assetPlatformId,
+            blockTimeInMinutes = blockTimeInMinutes,
+            categories = categories,
+            countryOrigin = countryOrigin,
+            description = description.toDomain(),
+            genesisDate = genesisDate,
+            hashingAlgorithm = hashingAlgorithm,
+            id = id,
+            image = image.toDomain(),
+            lastUpdated = lastUpdated,
+            links = links.toDomain(),
+            localization = localization,
+            marketCapRank = marketCapRank,
+            marketData = marketData,
+            name = name,
+            previewListing = previewListing,
+            publicNotice = publicNotice,
+            sentimentVotesDownPercentage = sentimentVotesDownPercentage,
+            sentimentVotesUpPercentage = sentimentVotesUpPercentage,
+            statusUpdates = statusUpdates,
+            symbol = symbol,
+            watchlistPortfolioUsers = watchlistPortfolioUsers,
+            webSlug = webSlug
         )
     }
 }

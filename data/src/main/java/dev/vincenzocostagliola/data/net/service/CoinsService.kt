@@ -18,7 +18,7 @@ interface CoinsService {
     /*---COIN data---*/
     @Headers(NetHelper.APIKEY)
     @GET("coins/id")
-    suspend fun getCoinData(@Path("id") coinId: String): ApiResponse<List<CoinDataDto>>
+    suspend fun getCoinData(@Path("id") coinId: String): ApiResponse<CoinDataDto>
 
     /*---COIN Historical data---*/
     @Headers(NetHelper.APIKEY)
