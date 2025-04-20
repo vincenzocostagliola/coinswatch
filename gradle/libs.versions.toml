@@ -24,6 +24,8 @@ kotlin-serialization = "1.6.3"
 coroutinesCore = "1.6.4"
 coroutines = "1.6.4"
 
+coil ="2.7.0"
+
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -37,6 +39,9 @@ androidx-ui = { group = "androidx.compose.ui", name = "ui" }
 androidx-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
 androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+coil = { module = "io.coil-kt:coil-compose", version.ref = "coil"}
+compose_icons = { module = "androidx.compose.material:material-icons-extended" }
+
 androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
@@ -80,6 +85,15 @@ coroutines = [
     "coroutinesAndroid",
     "coroutinesCore",
 ]
+
+compose = [
+    "androidx-ui",
+    "androidx-ui-graphics",
+    "androidx-ui-tooling",
+    "androidx-ui-tooling-preview",
+    "coil",
+    "compose.icons"]
+
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
