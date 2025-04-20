@@ -1,18 +1,70 @@
 package dev.vincenzocostagliola.data.dto
 
 
+import dev.vincenzocostagliola.data.domain.CoinHistoricalData
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import org.threeten.bp.OffsetDateTime
 
 @Serializable
 data class CoinHistoricalDataDto(
-    //TODO List<Double> means a list with only two double.
-    //TODO the first represent a date
-    //TODO the second represent price, money, whatelse
     @SerialName("market_caps")
-    val marketCaps: List<List<Double>>,
+    val marketCaps: List<MarketCapsChartPointDto>,
     @SerialName("prices")
-    val prices: List<List<Double>>,
+    val prices: List<PriceChartPointDto>,
     @SerialName("total_volumes")
-    val totalVolumes: List<List<Double>>
-)
+    val totalVolumes: List<TotalVolumeChartPointDto>
+) {
+    @Serializable
+    data class MarketCapsChartPointDto(
+        @Serializable
+        val date: OffsetDateTime,
+        @Serializable
+        val value: Double
+    ) {
+        fun toDomain(): CoinHistoricalData.MarketCapsChartPoint {
+            return CoinHistoricalData.MarketCapsChartPoint(
+                date = date,
+                value = value
+            )
+        }
+    }
+
+    @Serializable
+    data class PriceChartPointDto(
+        @Serializable
+        val date: OffsetDateTime,
+        @Serializable
+        val value: Double
+    ) {
+        fun toDomain(): CoinHistoricalData.PriceChartPoint {
+            return CoinHistoricalData.PriceChartPoint(
+                date = date,
+                value = value
+            )
+        }
+    }
+
+    @Serializable
+    data class TotalVolumeChartPointDto(
+        @Serializable
+        val date: OffsetDateTime,
+        @Serializable
+        val value: Double
+    ) {
+        fun toDomain(): CoinHistoricalData.TotalVolumeChartPoint {
+            return CoinHistoricalData.TotalVolumeChartPoint(
+                date = date,
+                value = value
+            )
+        }
+    }
+
+    fun toDomain(): CoinHistoricalData {
+        return CoinHistoricalData(
+            marketCaps = marketCaps.map { it.toDomain() },
+            prices = prices.map { it.toDomain() },
+            totalVolumes = totalVolumes.map { it.toDomain() }
+        )
+    }
+}

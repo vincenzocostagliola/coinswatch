@@ -4,6 +4,7 @@ import com.skydoves.sandwich.suspendOnError
 import com.skydoves.sandwich.suspendOnException
 import com.skydoves.sandwich.suspendOnSuccess
 import dev.vincenzocostagliola.data.domain.result.GetCoinDataResult
+import dev.vincenzocostagliola.data.domain.result.GetCoinHistoricalDataResult
 import dev.vincenzocostagliola.data.error.ErrorManagement
 import dev.vincenzocostagliola.data.domain.result.GetCoinsResult
 import dev.vincenzocostagliola.data.error.logErrorBasedOnCode
@@ -61,6 +62,35 @@ internal class RepositoryImpl(
                 Timber.e("error: ${this.throwable}")
                 val error = errorManagement.manageOnException(this)
                 emit(GetCoinDataResult.Failure(error))
+            }
+        }
+    }
+
+    override suspend fun getCoinHistoricalData(
+        coinId: String,
+        currency: String,
+        days: Int
+    ): Flow<GetCoinHistoricalDataResult> {
+        return flow {
+            val response = service.getCoinHistoricalData(
+                coinId = coinId,
+                currency = currency,
+                days = days
+            )
+
+            response.suspendOnSuccess {
+                emit(GetCoinHistoricalDataResult.Success(data.map { it.toDomain() }))
+            }.suspendOnError {
+                this.logErrorBasedOnCode(
+                    netCallId = "getCoinHistoricalData",
+                    request = ""
+                )
+                val error = errorManagement.manageOnError(this)
+                emit(GetCoinHistoricalDataResult.Failure(error))
+            }.suspendOnException {
+                Timber.e("error: ${this.throwable}")
+                val error = errorManagement.manageOnException(this)
+                emit(GetCoinHistoricalDataResult.Failure(error))
             }
         }
     }

@@ -22,7 +22,7 @@ interface CoinsService {
 
     /*---COIN Historical data---*/
     @Headers(NetHelper.APIKEY)
-    @GET("coins/bitcoin/{id}/market_char?precision=2")
+    @GET("coins/{id}/market_char?precision=2")
     suspend fun getCoinHistoricalData(
         @Path("id") coinId: String,
         @Path("vs_currency") currency: String,
