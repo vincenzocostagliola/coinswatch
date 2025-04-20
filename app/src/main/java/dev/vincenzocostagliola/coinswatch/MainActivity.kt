@@ -18,9 +18,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import dagger.hilt.android.AndroidEntryPoint
 import dev.vincenzocostagliola.coinswatch.ui.theme.CoinswatchTheme
 import dev.vincenzocostagliola.data.domain.Coin
-import dev.vincenzocostagliola.dylandogcollection.ui.Dimens
-import dev.vincenzocostagliola.dylandogcollection.ui.OutlinedCard
-import dev.vincenzocostagliola.dylandogcollection.ui.Progress
+import dev.vincenzocostagliola.coinswatch.ui.Dimens
+import dev.vincenzocostagliola.coinswatch.ui.OutlinedCard
+import dev.vincenzocostagliola.coinswatch.ui.Progress
 import kotlin.getValue
 
 @AndroidEntryPoint
@@ -73,7 +73,7 @@ fun ShowCoinList(list: List<Coin>) {
         //.verticalScroll(rememberScrollState()),
     ) {
         items(list.size) { item ->
-            OutlinedCard(item = (item))
+            OutlinedCard(item = list[item])
         }
     }
 }

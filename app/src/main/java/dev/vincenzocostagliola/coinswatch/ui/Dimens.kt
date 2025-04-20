@@ -1,4 +1,4 @@
-package dev.vincenzocostagliola.dylandogcollection.ui
+package dev.vincenzocostagliola.coinswatch.ui
 
 import androidx.compose.ui.unit.dp
 

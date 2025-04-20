@@ -1,4 +1,4 @@
-package dev.vincenzocostagliola.dylandogcollection.ui
+package dev.vincenzocostagliola.coinswatch.ui
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateFloatAsState
@@ -35,10 +35,6 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import coil.compose.AsyncImage
 import dev.vincenzocostagliola.data.domain.Coin
-import dev.vincenzocostagliola.dylandogcollection.R
-import dev.vincenzocostagliola.dylandogcollection.domain.CollectionItem
-import dev.vincenzocostagliola.dylandogcollection.domain.Details
-import dev.vincenzocostagliola.dylandogcollection.domain.ShortInfo
 import org.threeten.bp.LocalDate
 
 @Composable
