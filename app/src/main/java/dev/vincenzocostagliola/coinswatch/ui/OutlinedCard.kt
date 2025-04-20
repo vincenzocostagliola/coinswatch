@@ -42,7 +42,7 @@ import dev.vincenzocostagliola.dylandogcollection.domain.ShortInfo
 import org.threeten.bp.LocalDate
 
 @Composable
-fun OutlinedCard(item: List<Coin>) {
+fun OutlinedCard(item: Coin) {
     var expanded by remember { mutableStateOf(false) }
     val degrees by animateFloatAsState(if (expanded) -90f else 90f)
 
