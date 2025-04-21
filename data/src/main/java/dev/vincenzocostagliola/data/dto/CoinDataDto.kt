@@ -23,6 +23,7 @@ data class CoinDataDto(
     val id: String,
     @SerialName("image")
     val image: Image,
+    @Serializable(with = OffsetDateTimeSerializer::class)
     @SerialName("last_updated")
     val lastUpdated: OffsetDateTime,
     @SerialName("links")
@@ -73,24 +74,14 @@ data class CoinDataDto(
 
     @Serializable
     data class Links(
-        @SerialName("announcement_url")
-        val announcementUrl: List<Any?>,
-        @SerialName("bitcointalk_thread_identifier")
-        val bitcointalkThreadIdentifier: Any?,
         @SerialName("blockchain_site")
         val blockchainSite: List<String>,
-        @SerialName("chat_url")
-        val chatUrl: List<Any?>,
         @SerialName("facebook_username")
         val facebookUsername: String,
         @SerialName("homepage")
         val homepage: List<String>,
         @SerialName("official_forum_url")
         val officialForumUrl: List<String>,
-        @SerialName("repos_url")
-        val reposUrl: ReposUrl,
-        @SerialName("snapshot_url")
-        val snapshotUrl: Any?,
         @SerialName("subreddit_url")
         val subredditUrl: String,
         @SerialName("telegram_channel_identifier")
@@ -100,13 +91,6 @@ data class CoinDataDto(
         @SerialName("whitepaper")
         val whitepaper: String
     ) {
-        @Serializable
-        data class ReposUrl(
-            @SerialName("bitbucket")
-            val bitbucket: List<Any?>,
-            @SerialName("github")
-            val github: List<String>
-        )
 
         fun toDomain(): CoinData.Links {
             return CoinData.Links(homepage = homepage)

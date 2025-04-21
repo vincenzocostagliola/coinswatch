@@ -2,6 +2,7 @@ package dev.vincenzocostagliola.data.dto
 
 
 import dev.vincenzocostagliola.data.domain.CoinHistoricalData
+import dev.vincenzocostagliola.data.net.serializer.OffsetDateTimeSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.threeten.bp.OffsetDateTime
@@ -17,7 +18,7 @@ data class CoinHistoricalDataDto(
 ) {
     @Serializable
     data class MarketCapsChartPointDto(
-        @Serializable
+        @Serializable(with = OffsetDateTimeSerializer::class)
         val date: OffsetDateTime,
         @Serializable
         val value: Double
@@ -32,7 +33,7 @@ data class CoinHistoricalDataDto(
 
     @Serializable
     data class PriceChartPointDto(
-        @Serializable
+        @Serializable(with = OffsetDateTimeSerializer::class)
         val date: OffsetDateTime,
         @Serializable
         val value: Double
@@ -47,7 +48,7 @@ data class CoinHistoricalDataDto(
 
     @Serializable
     data class TotalVolumeChartPointDto(
-        @Serializable
+        @Serializable(with = OffsetDateTimeSerializer::class)
         val date: OffsetDateTime,
         @Serializable
         val value: Double

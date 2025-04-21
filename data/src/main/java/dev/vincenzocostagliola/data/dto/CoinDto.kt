@@ -84,8 +84,6 @@ data class CoinDto(
     val priceChange24h: Double,
     @SerialName("price_change_percentage_24h")
     val priceChangePercentage24h: Double,
-    @SerialName("roi")
-    val roi: Any?,
     @SerialName("symbol")
     val symbol: String,
     @SerialName("total_supply")
@@ -118,7 +116,6 @@ data class CoinDto(
             name = name,
             priceChange24h = priceChange24h,
             priceChangePercentage24h = priceChangePercentage24h,
-            roi = roi,
             symbol = symbol,
             totalSupply = totalSupply,
             totalVolume = totalVolume

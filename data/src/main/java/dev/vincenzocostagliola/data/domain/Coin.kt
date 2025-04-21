@@ -23,7 +23,6 @@ data class Coin(
     val name: String,
     val priceChange24h: Double,
     val priceChangePercentage24h: Double,
-    val roi: Any?,
     val symbol: String,
     val totalSupply: Int,
     val totalVolume: Long
