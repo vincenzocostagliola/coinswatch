@@ -41,7 +41,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class CoinDto(
     @SerialName("ath")
-    val ath: Int,
+    val ath: Double,
     @SerialName("ath_change_percentage")
     val athChangePercentage: Double,
     @SerialName("ath_date")
@@ -53,13 +53,13 @@ data class CoinDto(
     @SerialName("atl_date")
     val atlDate: String,
     @SerialName("circulating_supply")
-    val circulatingSupply: Int,
+    val circulatingSupply: Double,
     @SerialName("current_price")
-    val currentPrice: Int,
+    val currentPrice: Double,
     @SerialName("fully_diluted_valuation")
     val fullyDilutedValuation: Long,
     @SerialName("high_24h")
-    val high24h: Int,
+    val high24h: Double,
     @SerialName("id")
     val id: String,
     @SerialName("image")
@@ -67,7 +67,7 @@ data class CoinDto(
     @SerialName("last_updated")
     val lastUpdated: String,
     @SerialName("low_24h")
-    val low24h: Int,
+    val low24h: Double,
     @SerialName("market_cap")
     val marketCap: Long,
     @SerialName("market_cap_change_24h")
@@ -77,7 +77,7 @@ data class CoinDto(
     @SerialName("market_cap_rank")
     val marketCapRank: Int,
     @SerialName("max_supply")
-    val maxSupply: Int,
+    val maxSupply: Double,
     @SerialName("name")
     val name: String,
     @SerialName("price_change_24h")
@@ -87,7 +87,7 @@ data class CoinDto(
     @SerialName("symbol")
     val symbol: String,
     @SerialName("total_supply")
-    val totalSupply: Int,
+    val totalSupply: Double,
     @SerialName("total_volume")
     val totalVolume: Long
 ) {

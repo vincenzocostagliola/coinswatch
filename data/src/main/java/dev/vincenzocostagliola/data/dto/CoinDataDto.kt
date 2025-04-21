@@ -211,7 +211,7 @@ data class CoinDataDto(
     @Serializable
     data class MarketData(
         @SerialName("circulating_supply")
-        val circulatingSupply: Int,
+        val circulatingSupply: Double,
         @SerialName("current_price")
         val currentPrice: CurrentPrice,
         @SerialName("high_24h")
@@ -232,14 +232,14 @@ data class CoinDataDto(
         @SerialName("price_change_24h")
         val priceChange24h: Double,
         @SerialName("total_supply")
-        val totalSupply: Int,
+        val totalSupply: Double,
         @SerialName("total_volume")
         val totalVolume: TotalVolume
     ) {
         @Serializable
         data class CurrentPrice(
             @SerialName("eur")
-            val eur: Int
+            val eur: Double
         ) {
             fun toDomain(): CoinData.MarketData.CurrentPrice {
                 return CoinData.MarketData.CurrentPrice(
@@ -251,7 +251,7 @@ data class CoinDataDto(
         @Serializable
         data class High24h(
             @SerialName("eur")
-            val eur: Int
+            val eur: Double
         ) {
             fun toDomain(): CoinData.MarketData.High24h {
                 return CoinData.MarketData.High24h(eur = eur)
@@ -261,7 +261,7 @@ data class CoinDataDto(
         @Serializable
         data class Low24h(
             @SerialName("eur")
-            val eur: Int
+            val eur: Double
         ){
             fun toDomain(): CoinData.MarketData.Low24h {
                 return CoinData.MarketData.Low24h(eur = eur)

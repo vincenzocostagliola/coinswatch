@@ -75,7 +75,7 @@ data class CoinData(
     )
 
     data class MarketData(
-        val circulatingSupply: Int,
+        val circulatingSupply: Double,
         val currentPrice: CurrentPrice,
         val high24h: High24h,
         val lastUpdated: OffsetDateTime,
@@ -84,19 +84,19 @@ data class CoinData(
         val marketCapChange24h: Double,
         val marketCapRank: Int,
         val priceChange24h: Double,
-        val totalSupply: Int,
+        val totalSupply: Double,
     ) {
         //TODO Improve with more currencies
         data class CurrentPrice(
-            val eur: Int
+            val eur: Double
         )
 
         data class High24h(
-            val eur: Int
+            val eur: Double
         )
 
         data class Low24h(
-            val eur: Int
+            val eur: Double
         )
 
         data class MarketCap(
