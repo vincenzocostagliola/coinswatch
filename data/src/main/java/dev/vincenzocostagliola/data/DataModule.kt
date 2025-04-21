@@ -7,6 +7,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import dev.vincenzocostagliola.data.error.ErrorManagement
+import dev.vincenzocostagliola.data.net.interceptor.ApiHeaderInterceptor
 import dev.vincenzocostagliola.data.net.repository.Repository
 import dev.vincenzocostagliola.data.net.repository.RepositoryImpl
 import dev.vincenzocostagliola.data.net.service.CoinsService
@@ -74,7 +75,8 @@ class DataModule {
     @Provides
     @Singleton
     fun provideOkHttpClient(
-        loggingInterceptor: HttpLoggingInterceptor
+        loggingInterceptor: HttpLoggingInterceptor,
+        apiHeaderInterceptor : ApiHeaderInterceptor
     ): OkHttpClient {
         // This setup is for dev builds
         //TODO production setup needs to be done
@@ -83,6 +85,7 @@ class DataModule {
             .readTimeout(90, TimeUnit.SECONDS)
             .connectTimeout(90, TimeUnit.SECONDS)
             .addInterceptor(loggingInterceptor)
+            .addInterceptor(apiHeaderInterceptor)
             .build()
     }
 

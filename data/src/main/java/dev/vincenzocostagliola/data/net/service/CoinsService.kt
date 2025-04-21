@@ -8,12 +8,12 @@ import dev.vincenzocostagliola.data.net.NetHelper
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface CoinsService {
     /*---COINS with market data---*/
-    @Headers(NetHelper.APIKEY)
     @GET("coins/markets")
-    suspend fun getCoinsWithMarketData(@Path("vs_currency") currency: String): ApiResponse<List<CoinDto>>
+    suspend fun getCoinsWithMarketData(@Query("vs_currency") currency: String): ApiResponse<List<CoinDto>>
 
     /*---COIN data---*/
     @Headers(NetHelper.APIKEY)
