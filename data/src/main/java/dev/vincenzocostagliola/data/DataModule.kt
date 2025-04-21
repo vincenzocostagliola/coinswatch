@@ -13,6 +13,7 @@ import dev.vincenzocostagliola.data.net.repository.RepositoryImpl
 import dev.vincenzocostagliola.data.net.service.CoinsService
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonConfiguration
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -27,7 +28,10 @@ class DataModule {
 
     @Provides
     @Singleton
-    fun provideJson(): Json = Json
+    fun provideJson(): Json = Json {
+        encodeDefaults = true
+        ignoreUnknownKeys = true
+    }
 
     @Provides
     @Singleton
@@ -61,7 +65,6 @@ class DataModule {
         json: Json
     ): Retrofit {
         val contentType = "application/json".toMediaType()
-        //JsonConfiguration(prettyPrint = true, ignoreUnknownKeys = true)
         val kotlinxConverterFactory = json.asConverterFactory(contentType)
 
         return Retrofit.Builder()
@@ -76,7 +79,7 @@ class DataModule {
     @Singleton
     fun provideOkHttpClient(
         loggingInterceptor: HttpLoggingInterceptor,
-        apiHeaderInterceptor : ApiHeaderInterceptor
+        apiHeaderInterceptor: ApiHeaderInterceptor
     ): OkHttpClient {
         // This setup is for dev builds
         //TODO production setup needs to be done

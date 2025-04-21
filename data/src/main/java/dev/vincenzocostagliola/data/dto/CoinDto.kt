@@ -57,7 +57,7 @@ data class CoinDto(
     @SerialName("current_price")
     val currentPrice: Double,
     @SerialName("fully_diluted_valuation")
-    val fullyDilutedValuation: Long,
+    val fullyDilutedValuation: Double,
     @SerialName("high_24h")
     val high24h: Double,
     @SerialName("id")
@@ -69,15 +69,15 @@ data class CoinDto(
     @SerialName("low_24h")
     val low24h: Double,
     @SerialName("market_cap")
-    val marketCap: Long,
+    val marketCap: Double,
     @SerialName("market_cap_change_24h")
-    val marketCapChange24h: Long,
+    val marketCapChange24h: Double,
     @SerialName("market_cap_change_percentage_24h")
     val marketCapChangePercentage24h: Double,
     @SerialName("market_cap_rank")
     val marketCapRank: Int,
     @SerialName("max_supply")
-    val maxSupply: Double,
+    val maxSupply: Double?,
     @SerialName("name")
     val name: String,
     @SerialName("price_change_24h")
@@ -89,7 +89,7 @@ data class CoinDto(
     @SerialName("total_supply")
     val totalSupply: Double,
     @SerialName("total_volume")
-    val totalVolume: Long
+    val totalVolume: Double?
 ) {
     //TODO improve domain mapping
     fun toDomain(): Coin {

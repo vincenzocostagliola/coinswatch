@@ -100,7 +100,7 @@ data class CoinData(
         )
 
         data class MarketCap(
-            val eur: Long
+            val eur: Double
         )
     }
 }

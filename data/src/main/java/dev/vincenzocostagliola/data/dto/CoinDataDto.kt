@@ -271,7 +271,7 @@ data class CoinDataDto(
         @Serializable
         data class MarketCap(
             @SerialName("eur")
-            val eur: Long
+            val eur: Double
         ){
             fun toDomain(): CoinData.MarketData.MarketCap {
                 return CoinData.MarketData.MarketCap(eur = eur)
@@ -287,7 +287,7 @@ data class CoinDataDto(
         @Serializable
         data class TotalVolume(
             @SerialName("eur")
-            val eur: Long
+            val eur: Double
         )
 
         fun toDomain(): CoinData.MarketData {
