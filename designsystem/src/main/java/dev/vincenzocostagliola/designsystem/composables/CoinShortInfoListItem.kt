@@ -13,7 +13,6 @@ import dev.vincenzocostagliola.data.domain.Coin
 @Composable
 fun CoinShortInfoListItem(coin: Coin) {
     Column {
-        HorizontalDivider()
         ListItem(
             headlineContent = { Text(coin.name) },
             supportingContent = { Text(coin.currentPrice.toString()) },
