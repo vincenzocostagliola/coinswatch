@@ -1,4 +1,4 @@
-package dev.vincenzocostagliola.coinswatch.ui.theme
+package dev.vincenzocostagliola.designsystem.theme
 
 import androidx.compose.ui.graphics.Color
 

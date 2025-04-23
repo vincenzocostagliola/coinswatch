@@ -1,4 +1,4 @@
-package dev.vincenzocostagliola.coinswatch.ui
+package dev.vincenzocostagliola.designsystem.composables
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box

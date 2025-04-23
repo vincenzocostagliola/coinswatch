@@ -1,4 +1,4 @@
-package dev.vincenzocostagliola.coinswatch.ui.theme
+package dev.vincenzocostagliola.designsystem.theme
 
 import android.app.Activity
 import android.os.Build

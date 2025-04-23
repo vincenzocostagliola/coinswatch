@@ -1,4 +1,4 @@
-package dev.vincenzocostagliola.coinswatch.ui
+package dev.vincenzocostagliola.designsystem.values
 
 import androidx.compose.ui.unit.dp
 

@@ -1,4 +1,4 @@
-package dev.vincenzocostagliola.coinswatch.ui
+package dev.vincenzocostagliola.designsystem.composables
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.HorizontalDivider

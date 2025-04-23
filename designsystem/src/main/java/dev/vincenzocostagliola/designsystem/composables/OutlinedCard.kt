@@ -1,4 +1,4 @@
-package dev.vincenzocostagliola.coinswatch.ui
+package dev.vincenzocostagliola.designsystem.composables
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateFloatAsState
@@ -34,6 +34,7 @@ import androidx.compose.ui.res.vectorResource
 import coil.compose.AsyncImage
 import dev.vincenzocostagliola.coinswatch.R
 import dev.vincenzocostagliola.data.domain.Coin
+import dev.vincenzocostagliola.designsystem.values.Dimens
 
 
 @Composable

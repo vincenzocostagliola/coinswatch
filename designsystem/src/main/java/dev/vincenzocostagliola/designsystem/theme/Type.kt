@@ -1,4 +1,4 @@
-package dev.vincenzocostagliola.coinswatch.ui.theme
+package dev.vincenzocostagliola.designsystem.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

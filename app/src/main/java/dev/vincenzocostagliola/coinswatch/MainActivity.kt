@@ -16,11 +16,11 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import dagger.hilt.android.AndroidEntryPoint
-import dev.vincenzocostagliola.coinswatch.ui.theme.CoinswatchTheme
+import dev.vincenzocostagliola.designsystem.theme.CoinswatchTheme
 import dev.vincenzocostagliola.data.domain.Coin
-import dev.vincenzocostagliola.coinswatch.ui.Dimens
-import dev.vincenzocostagliola.coinswatch.ui.Progress
-import dev.vincenzocostagliola.coinswatch.ui.CoinShortInfoListItem
+import dev.vincenzocostagliola.designsystem.values.Dimens
+import dev.vincenzocostagliola.designsystem.composables.Progress
+import dev.vincenzocostagliola.designsystem.composables.CoinShortInfoListItem
 import kotlin.getValue
 
 @AndroidEntryPoint
