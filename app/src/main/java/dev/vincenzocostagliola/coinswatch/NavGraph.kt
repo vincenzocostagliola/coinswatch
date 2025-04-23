@@ -18,8 +18,8 @@ fun NavGraph(navController: NavHostController) {
             HomeScreen(viewModel, navController)
         }
         composable(detailScreen) {
-            val viewModel = hiltViewModel<HomeViewModel>()
-            DetailScreen()
+            val viewModel = hiltViewModel<DetailsViewModel>()
+            DetailScreen(viewModel)
         }
 
     }
