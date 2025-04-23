@@ -74,6 +74,7 @@ dependencies {
     /**HILT*/
     // For hilt Implementation
     implementation (libs.hilt)
+    implementation(libs.androidx.hilt.navigation.compose)
     ksp(libs.hilt.compiler)
     implementation(libs.timber)
     implementation(libs.threeTen)

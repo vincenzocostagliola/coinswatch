@@ -15,6 +15,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
 import dev.vincenzocostagliola.designsystem.theme.CoinswatchTheme
 import dev.vincenzocostagliola.data.domain.Coin
@@ -26,9 +27,6 @@ import kotlin.getValue
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    private val mainViewModel: MainViewModel by viewModels()
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -37,52 +35,24 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    MainScreen(mainViewModel)
+                    MainScreen()
                 }
             }
         }
     }
 
     @Composable
-    private fun MainScreen(viewModel: MainViewModel) {
-
-        val state: State<MainScreenState> = viewModel.mainScreenState.collectAsState()
-        when (val viewState = state.value) {
-            is MainScreenState.Error -> Unit
-            MainScreenState.Loading -> {
-                Progress(true)
-                viewModel.sendEvent(MainScreenEvents.GetCoinsData)
-            }
-
-            is MainScreenState.Success -> {
-                Progress(false)
-                ShowCoinList(viewState.list)
-            }
-        }
-
+    private fun MainScreen() {
+        val navController = rememberNavController()
+        NavGraph(navController = navController)
     }
-}
 
-@Composable
-fun ShowCoinList(list: List<Coin>) {
-    LazyColumn(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(horizontal = Dimens.XRegular)
-        //.verticalScroll(rememberScrollState()),
-    ) {
-        items(list.size) { item ->
-            CoinShortInfoListItem(
-                coin = list[item]
-            )
+
+    @Preview(showBackground = true)
+    @Composable
+    fun DefaultPreview() {
+        CoinswatchTheme {
+            // ShowCoinList(emptyList())
         }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    CoinswatchTheme {
-        ShowCoinList(emptyList())
     }
 }
