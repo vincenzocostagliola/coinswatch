@@ -14,17 +14,17 @@ import dev.vincenzocostagliola.designsystem.composables.Progress
 import dev.vincenzocostagliola.designsystem.values.Dimens
 
 @Composable
-fun HomeScreen(viewModel: MainViewModel, navigationController: NavHostController) {
+fun HomeScreen(viewModel: HomeViewModel, navigationController: NavHostController) {
 
-    val state: State<MainScreenState> = viewModel.mainScreenState.collectAsState()
+    val state: State<HomeScreenState> = viewModel.homeScreenState.collectAsState()
     when (val viewState = state.value) {
-        is MainScreenState.Error -> Unit
-        MainScreenState.Loading -> {
+        is HomeScreenState.Error -> Unit
+        HomeScreenState.Loading -> {
             Progress(true)
-            viewModel.sendEvent(MainScreenEvents.GetCoinsData)
+            viewModel.sendEvent(HomeScreenEvents.GetCoinsData)
         }
 
-        is MainScreenState.Success -> {
+        is HomeScreenState.Success -> {
             Progress(false)
             ShowCoinList(viewState.list) {
                 navigationController.navigate(detailScreen)

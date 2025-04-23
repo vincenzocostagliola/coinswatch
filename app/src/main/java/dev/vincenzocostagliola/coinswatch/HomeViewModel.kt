@@ -14,18 +14,18 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
-sealed class MainScreenState {
-    data object Loading : MainScreenState()
-    data class Success(val list: List<Coin>) : MainScreenState()
-    data class Error(val error: CoinSwatchError) : MainScreenState()
+sealed class HomeScreenState {
+    data object Loading : HomeScreenState()
+    data class Success(val list: List<Coin>) : HomeScreenState()
+    data class Error(val error: CoinSwatchError) : HomeScreenState()
 }
 
-sealed class MainScreenEvents {
-    data object GetCoinsData : MainScreenEvents()
+sealed class HomeScreenEvents {
+    data object GetCoinsData : HomeScreenEvents()
 }
 
 @HiltViewModel
-class MainViewModel @Inject constructor(
+class HomeViewModel @Inject constructor(
     private val repository: Repository
 ) : ViewModel() {
 
@@ -33,22 +33,22 @@ class MainViewModel @Inject constructor(
     private val currency = "eur"
 
 
-    private val _mainScreenState: MutableStateFlow<MainScreenState> =
-        MutableStateFlow(MainScreenState.Loading)
-    val mainScreenState: StateFlow<MainScreenState>
-        get() = _mainScreenState
+    private val _homeScreenState: MutableStateFlow<HomeScreenState> =
+        MutableStateFlow(HomeScreenState.Loading)
+    val homeScreenState: StateFlow<HomeScreenState>
+        get() = _homeScreenState
 
-    fun sendEvent(event: MainScreenEvents) {
+    fun sendEvent(event: HomeScreenEvents) {
         viewModelScope.launch() {
             when (event) {
-                MainScreenEvents.GetCoinsData -> getCoinsWithMarketData()
+                HomeScreenEvents.GetCoinsData -> getCoinsWithMarketData()
             }
         }
     }
 
     private suspend fun getCoinsWithMarketData() {
-        _mainScreenState.update {
-            MainScreenState.Loading
+        _homeScreenState.update {
+            HomeScreenState.Loading
         }
 
         repository.getCoinsWithMarketData(
@@ -61,12 +61,12 @@ class MainViewModel @Inject constructor(
 
     private fun executeCollect(result: GetCoinsResult) {
         when (result) {
-            is GetCoinsResult.Failure -> _mainScreenState.update {
-                MainScreenState.Error(result.error)
+            is GetCoinsResult.Failure -> _homeScreenState.update {
+                HomeScreenState.Error(result.error)
             }
 
-            is GetCoinsResult.Success -> _mainScreenState.update {
-                MainScreenState.Success(result.coinList)
+            is GetCoinsResult.Success -> _homeScreenState.update {
+                HomeScreenState.Success(result.coinList)
             }
         }
     }
