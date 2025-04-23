@@ -19,8 +19,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import dev.vincenzocostagliola.coinswatch.ui.theme.CoinswatchTheme
 import dev.vincenzocostagliola.data.domain.Coin
 import dev.vincenzocostagliola.coinswatch.ui.Dimens
-import dev.vincenzocostagliola.coinswatch.ui.OutlinedCard
 import dev.vincenzocostagliola.coinswatch.ui.Progress
+import dev.vincenzocostagliola.coinswatch.ui.CoinShortInfoListItem
 import kotlin.getValue
 
 @AndroidEntryPoint
@@ -73,7 +73,9 @@ fun ShowCoinList(list: List<Coin>) {
         //.verticalScroll(rememberScrollState()),
     ) {
         items(list.size) { item ->
-            OutlinedCard(item = list[item])
+            CoinShortInfoListItem(
+                coin = list[item]
+            )
         }
     }
 }
