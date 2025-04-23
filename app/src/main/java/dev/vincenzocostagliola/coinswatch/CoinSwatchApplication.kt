@@ -9,6 +9,6 @@ class CoinSwatchApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        this.setupLogging()
+        setupLogging()
     }
 }

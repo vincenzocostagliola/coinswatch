@@ -7,9 +7,9 @@ import java.util.Locale
 object LoggingSetup {
     private const val TAG_LOGGING = "COINSWATCH"
 
-    internal fun Context.setupLogging() {
-        val timberTag = TAG_LOGGING //+ ": " + BuildConfig.BUILD_TYPE
-
+    internal fun setupLogging() {
+        val timberTag = TAG_LOGGING
+        // TODO Add Remote logging like sentry
         Timber.plant(ExplicitDebugTree())
         Timber.tag(timberTag)
     }
