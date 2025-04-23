@@ -26,23 +26,25 @@ fun HomeScreen(viewModel: MainViewModel, navigationController: NavHostController
 
         is MainScreenState.Success -> {
             Progress(false)
-            ShowCoinList(viewState.list)
+            ShowCoinList(viewState.list) {
+                navigationController.navigate(detailScreen)
+            }
         }
     }
 
 }
 
 @Composable
-private fun ShowCoinList(list: List<Coin>) {
+private fun ShowCoinList(list: List<Coin>, onClick: (String) -> Unit) {
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
             .padding(horizontal = Dimens.XRegular)
-        //.verticalScroll(rememberScrollState()),
     ) {
         items(list.size) { item ->
             CoinShortInfoListItem(
-                coin = list[item]
+                coin = list[item],
+                onClick = onClick
             )
         }
     }
