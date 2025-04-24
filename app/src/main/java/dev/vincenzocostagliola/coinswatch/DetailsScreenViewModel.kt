@@ -22,7 +22,7 @@ sealed class DetailScreenEvents {
 }
 
 @HiltViewModel
-class DetailScreenViewModel @Inject constructor(
+class DetailsScreenViewModel @Inject constructor(
     private val repository: Repository
 ) : ViewModel() {
 

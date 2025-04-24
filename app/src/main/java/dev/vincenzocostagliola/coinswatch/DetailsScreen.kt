@@ -8,7 +8,7 @@ import androidx.compose.runtime.collectAsState
 
 
 @Composable
-internal fun DetailScreen(viewModel: DetailScreenViewModel, coinId: String?) {
+internal fun DetailsScreen(viewModel: DetailsScreenViewModel, coinId: String?) {
     Text("This is details screen. CoinId = $coinId")
 
     val state: State<DetailScreenState> = viewModel.detailScreenState.collectAsState()

@@ -40,8 +40,8 @@ fun NavGraph(navController: NavHostController) {
         ) { backStackEntry ->
             val coinId = backStackEntry.arguments?.getString(NavigationRoute.DetailsScreen.argumentId)
             Timber.d("Coin Navigation - received coinId = $coinId")
-            val viewModel = hiltViewModel<DetailScreenViewModel>()
-            DetailScreen(viewModel, coinId)
+            val viewModel = hiltViewModel<DetailsScreenViewModel>()
+            DetailsScreen(viewModel, coinId)
         }
 
     }
