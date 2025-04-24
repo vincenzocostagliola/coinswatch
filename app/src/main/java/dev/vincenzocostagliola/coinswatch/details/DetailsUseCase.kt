@@ -19,7 +19,7 @@ import javax.inject.Inject
 sealed class CoinDataWithHistoryResult {
 
     data class CoinDataWithHistory(
-        val history: List<CoinHistoricalData>,
+        val history: CoinHistoricalData,
         val marketCapRank: Int,
         val name: String,
         val id: String,

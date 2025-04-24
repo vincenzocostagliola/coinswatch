@@ -2,23 +2,23 @@ package dev.vincenzocostagliola.data.dto
 
 
 import dev.vincenzocostagliola.data.domain.CoinHistoricalData
-import dev.vincenzocostagliola.data.net.serializer.OffsetDateTimeSerializer
+import dev.vincenzocostagliola.data.net.serializer.EpochOffsetDateTimeSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.threeten.bp.OffsetDateTime
 
 @Serializable
 data class CoinHistoricalDataDto(
-    @SerialName("market_caps")
-    val marketCaps: List<MarketCapsChartPointDto>,
+    //@SerialName("market_caps")
+    //val marketCaps: List<List<MarketCapsChartPointDto>>,
     @SerialName("prices")
-    val prices: List<PriceChartPointDto>,
-    @SerialName("total_volumes")
-    val totalVolumes: List<TotalVolumeChartPointDto>
+    val prices: List<List<Double>>,
+    //@SerialName("total_volumes")
+    //val totalVolumes: List<List<TotalVolumeChartPointDto>>
 ) {
     @Serializable
     data class MarketCapsChartPointDto(
-        @Serializable(with = OffsetDateTimeSerializer::class)
+        @Serializable(with = EpochOffsetDateTimeSerializer::class)
         val date: OffsetDateTime,
         @Serializable
         val value: Double
@@ -33,7 +33,7 @@ data class CoinHistoricalDataDto(
 
     @Serializable
     data class PriceChartPointDto(
-        @Serializable(with = OffsetDateTimeSerializer::class)
+        @Serializable(with = EpochOffsetDateTimeSerializer::class)
         val date: OffsetDateTime,
         @Serializable
         val value: Double
@@ -48,7 +48,7 @@ data class CoinHistoricalDataDto(
 
     @Serializable
     data class TotalVolumeChartPointDto(
-        @Serializable(with = OffsetDateTimeSerializer::class)
+        @Serializable(with = EpochOffsetDateTimeSerializer::class)
         val date: OffsetDateTime,
         @Serializable
         val value: Double
@@ -63,9 +63,9 @@ data class CoinHistoricalDataDto(
 
     fun toDomain(): CoinHistoricalData {
         return CoinHistoricalData(
-            marketCaps = marketCaps.map { it.toDomain() },
-            prices = prices.map { it.toDomain() },
-            totalVolumes = totalVolumes.map { it.toDomain() }
+            marketCaps = emptyList(), // marketCaps.map { it.map { it.toDomain() }},
+            prices = emptyList(), //prices.map { it.toDomain() },
+            totalVolumes = emptyList(), //totalVolumes.map { it.toDomain() }
         )
     }
 }

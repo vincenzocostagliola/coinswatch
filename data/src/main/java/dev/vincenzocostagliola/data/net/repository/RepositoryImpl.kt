@@ -79,7 +79,7 @@ internal class RepositoryImpl(
             )
 
             response.suspendOnSuccess {
-                emit(GetCoinHistoricalDataResult.Success(data.map { it.toDomain() }))
+                emit(GetCoinHistoricalDataResult.Success(data.toDomain() ))
             }.suspendOnError {
                 this.logErrorBasedOnCode(
                     netCallId = "getCoinHistoricalData",
