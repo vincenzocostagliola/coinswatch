@@ -1,5 +1,7 @@
 package dev.vincenzocostagliola.coinswatch.details
 
+import androidx.compose.ui.text.intl.Locale
+import dev.vincenzocostagliola.data.domain.CoinData
 import dev.vincenzocostagliola.data.domain.CoinData.Image
 import dev.vincenzocostagliola.data.domain.CoinHistoricalData
 import dev.vincenzocostagliola.data.domain.result.GetCoinDataResult
@@ -23,7 +25,8 @@ sealed class CoinDataWithHistoryResult {
         val marketCapRank: Int,
         val name: String,
         val id: String,
-        val image: Image
+        val image: Image,
+        val description: String
     ) : CoinDataWithHistoryResult()
 
     data class Error(val error: CoinSwatchError) : CoinDataWithHistoryResult()
@@ -66,7 +69,8 @@ internal class DetailsUseCase @Inject constructor(
             marketCapRank = coinData.coinData.marketCapRank,
             name = coinData.coinData.name,
             id = coinData.coinData.id,
-            image = coinData.coinData.image
+            image = coinData.coinData.image,
+            description = coinData.coinData.description.getLocalized()
         )
 
     private fun manageFailure(
@@ -104,5 +108,15 @@ internal class DetailsUseCase @Inject constructor(
             currency = currency,
             days = days
         ).flowOn(Dispatchers.IO)
+    }
+}
+
+private fun CoinData.Description.getLocalized(): String {
+    val currentLocale = Locale.current
+    Timber.d("Locale - current Locale: $currentLocale")
+    //TODO Improve locale mapping
+    return when (currentLocale.language) {
+        "it" -> this.it
+        else -> this.en
     }
 }
