@@ -46,13 +46,4 @@ class MainActivity : ComponentActivity() {
         val navController = rememberNavController()
         NavGraph(navController = navController)
     }
-
-
-    @Preview(showBackground = true)
-    @Composable
-    fun DefaultPreview() {
-        CoinswatchTheme {
-            // ShowCoinList(emptyList())
-        }
-    }
 }

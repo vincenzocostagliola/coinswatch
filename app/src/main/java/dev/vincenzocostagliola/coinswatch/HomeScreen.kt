@@ -49,3 +49,11 @@ private fun ShowCoinList(list: List<Coin>, onClick: (String) -> Unit) {
         }
     }
 }
+
+@Preview(showBackground = true)
+@Composable
+fun DefaultPreview() {
+    CoinswatchTheme {
+        // ShowCoinList(emptyList())
+    }
+}
