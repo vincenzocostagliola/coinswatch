@@ -11,14 +11,14 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-sealed class DetailScreenState {
-    data object Loading : DetailScreenState()
-    data class Success(val list: List<Coin>) : DetailScreenState()
-    data class Error(val error: CoinSwatchError) : DetailScreenState()
+sealed class DetailsScreenState {
+    data object Loading : DetailsScreenState()
+    data class Success(val list: List<Coin>) : DetailsScreenState()
+    data class Error(val error: CoinSwatchError) : DetailsScreenState()
 }
 
-sealed class DetailScreenEvents {
-    data class GetCoinData(val coinId: String?) : DetailScreenEvents()
+sealed class DetailsScreenEvents {
+    data class GetCoinData(val coinId: String?) : DetailsScreenEvents()
 }
 
 @HiltViewModel
@@ -26,15 +26,15 @@ class DetailsScreenViewModel @Inject constructor(
     private val repository: Repository
 ) : ViewModel() {
 
-    private val _detailScreenState: MutableStateFlow<DetailScreenState> =
-        MutableStateFlow(DetailScreenState.Loading)
-    val detailScreenState: StateFlow<DetailScreenState>
-        get() = _detailScreenState
+    private val _detailsScreenState: MutableStateFlow<DetailsScreenState> =
+        MutableStateFlow(DetailsScreenState.Loading)
+    val detailsScreenState: StateFlow<DetailsScreenState>
+        get() = _detailsScreenState
 
-    fun sendEvent(event: DetailScreenEvents) {
+    fun sendEvent(event: DetailsScreenEvents) {
         viewModelScope.launch() {
             when (event) {
-                is DetailScreenEvents.GetCoinData -> Unit
+                is DetailsScreenEvents.GetCoinData -> Unit
             }
         }
     }

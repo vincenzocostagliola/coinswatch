@@ -11,15 +11,15 @@ import androidx.compose.runtime.collectAsState
 internal fun DetailsScreen(viewModel: DetailsScreenViewModel, coinId: String?) {
     Text("This is details screen. CoinId = $coinId")
 
-    val state: State<DetailScreenState> = viewModel.detailScreenState.collectAsState()
+    val state: State<DetailsScreenState> = viewModel.detailsScreenState.collectAsState()
     when (val viewState = state.value) {
-        is DetailScreenState.Error -> Unit
-        DetailScreenState.Loading -> {
+        is DetailsScreenState.Error -> Unit
+        DetailsScreenState.Loading -> {
             Progress(true)
-            viewModel.sendEvent(DetailScreenEvents.GetCoinData(coinId))
+            viewModel.sendEvent(DetailsScreenEvents.GetCoinData(coinId))
         }
 
-        is DetailScreenState.Success -> {
+        is DetailsScreenState.Success -> {
             Progress(false)
         }
     }
