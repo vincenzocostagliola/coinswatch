@@ -31,9 +31,7 @@ data class CoinHistoricalDataDto(
 
     fun toDomain(): CoinHistoricalData {
         return CoinHistoricalData(
-            marketCaps = emptyList(), // marketCaps.map { it.map { it.toDomain() }},
-            prices = prices.map { it.toDomain() },
-            totalVolumes = emptyList(), //totalVolumes.map { it.toDomain() }
+            prices = prices.map { it.toDomain() }
         )
     }
 }
