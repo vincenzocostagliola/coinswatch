@@ -1,4 +1,4 @@
-package dev.vincenzocostagliola.coinswatch
+package dev.vincenzocostagliola.coinswatch.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

@@ -1,4 +1,4 @@
-package dev.vincenzocostagliola.coinswatch
+package dev.vincenzocostagliola.coinswatch.home
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -8,6 +8,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
+import dev.vincenzocostagliola.coinswatch.NavigationRoute
 import dev.vincenzocostagliola.data.domain.Coin
 import dev.vincenzocostagliola.designsystem.composables.CoinShortInfoListItem
 import dev.vincenzocostagliola.designsystem.composables.Progress

@@ -7,6 +7,10 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import dev.vincenzocostagliola.coinswatch.details.DetailsScreen
+import dev.vincenzocostagliola.coinswatch.details.DetailsScreenViewModel
+import dev.vincenzocostagliola.coinswatch.home.HomeScreen
+import dev.vincenzocostagliola.coinswatch.home.HomeViewModel
 import timber.log.Timber
 
 
