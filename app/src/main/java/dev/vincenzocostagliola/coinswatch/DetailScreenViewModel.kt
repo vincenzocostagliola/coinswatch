@@ -6,7 +6,7 @@ import dev.vincenzocostagliola.data.net.repository.Repository
 import javax.inject.Inject
 
 @HiltViewModel
-class DetailsViewModel  @Inject constructor(
+class DetailScreenViewModel  @Inject constructor(
     private val repository: Repository
 ) : ViewModel() {
 }
