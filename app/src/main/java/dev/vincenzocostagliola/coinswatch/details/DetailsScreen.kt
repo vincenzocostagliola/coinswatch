@@ -3,7 +3,6 @@ package dev.vincenzocostagliola.coinswatch.details
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import dev.vincenzocostagliola.designsystem.composables.Progress
@@ -11,7 +10,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import coil.compose.AsyncImage
-import dev.vincenzocostagliola.designsystem.composables.CoinShortInfoListItem
+import dev.vincenzocostagliola.designsystem.composables.CoinHistoryListItem
 import dev.vincenzocostagliola.designsystem.values.Dimens
 
 
@@ -40,7 +39,7 @@ fun ShowDetails(data: CoinDataWithHistoryResult.CoinDataWithHistory) {
             .padding(horizontal = Dimens.XRegular)
     ) {
         items(data.history.prices.size) { item ->
-            CoinShortInfoListItem(
+            CoinHistoryListItem(
                 history = data.history.prices[item]
             )
         }
