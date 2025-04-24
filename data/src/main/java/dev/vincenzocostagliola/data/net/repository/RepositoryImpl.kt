@@ -79,7 +79,8 @@ internal class RepositoryImpl(
             )
 
             response.suspendOnSuccess {
-                emit(GetCoinHistoricalDataResult.Success(data.toDomain() ))
+                Timber.d("Response success: $data")
+                emit(GetCoinHistoricalDataResult.Success(data.toDomain()))
             }.suspendOnError {
                 this.logErrorBasedOnCode(
                     netCallId = "getCoinHistoricalData",
