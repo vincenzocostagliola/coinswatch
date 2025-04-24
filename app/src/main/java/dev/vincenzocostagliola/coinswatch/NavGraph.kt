@@ -7,6 +7,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import timber.log.Timber
 
 
 sealed class NavigationRoute() {
@@ -17,9 +18,10 @@ sealed class NavigationRoute() {
     }
 
     data object DetailsScreen : NavigationRoute() {
-        fun createRoute(coinId: String) = "$route/$coinId"
+        fun createRoute(coinId: String) = "$screenName?$argumentId=${coinId}"
         const val argumentId : String = "coinId"
-        override val route: String = "detailScreen/{$argumentId}"
+        private val screenName :String = "detailScreen"
+        override val route: String = "$screenName?$argumentId={$argumentId}"
     }
 }
 
@@ -37,6 +39,7 @@ fun NavGraph(navController: NavHostController) {
             arguments = listOf(navArgument(NavigationRoute.DetailsScreen.argumentId) { type = NavType.StringType })
         ) { backStackEntry ->
             val coinId = backStackEntry.arguments?.getString(NavigationRoute.DetailsScreen.argumentId)
+            Timber.d("Coin Navigation - received coinId = $coinId")
             val viewModel = hiltViewModel<DetailScreenViewModel>()
             DetailScreen(viewModel, coinId)
         }

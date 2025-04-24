@@ -12,6 +12,7 @@ import dev.vincenzocostagliola.data.domain.Coin
 import dev.vincenzocostagliola.designsystem.composables.CoinShortInfoListItem
 import dev.vincenzocostagliola.designsystem.composables.Progress
 import dev.vincenzocostagliola.designsystem.values.Dimens
+import timber.log.Timber
 
 @Composable
 fun HomeScreen(viewModel: HomeViewModel, navigationController: NavHostController) {
@@ -27,11 +28,11 @@ fun HomeScreen(viewModel: HomeViewModel, navigationController: NavHostController
         is HomeScreenState.Success -> {
             Progress(false)
             ShowCoinList(viewState.list) { coinId ->
+                Timber.d("Coin Navigation - sent = $coinId")
                 navigationController.navigate(NavigationRoute.DetailsScreen.createRoute(coinId))
             }
         }
     }
-
 }
 
 @Composable
