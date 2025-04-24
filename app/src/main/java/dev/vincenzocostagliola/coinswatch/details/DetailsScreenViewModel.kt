@@ -29,7 +29,7 @@ internal class DetailsScreenViewModel @Inject constructor(
 
     //TODO improve currency and days management with user preferences
     private val currency = "eur"
-    private val days = 1
+    private val days = 7
 
     private val _detailsScreenState: MutableStateFlow<DetailsScreenState> =
         MutableStateFlow(DetailsScreenState.Loading)

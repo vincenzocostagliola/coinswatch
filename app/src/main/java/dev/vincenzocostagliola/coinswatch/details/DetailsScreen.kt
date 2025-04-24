@@ -23,5 +23,4 @@ internal fun DetailsScreen(viewModel: DetailsScreenViewModel, coinId: String?) {
             Progress(false)
         }
     }
-
 }
