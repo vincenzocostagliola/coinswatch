@@ -25,7 +25,7 @@ sealed class HomeScreenEvents {
 }
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(
+internal class HomeViewModel @Inject constructor(
     private val repository: Repository
 ) : ViewModel() {
 

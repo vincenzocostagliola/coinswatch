@@ -22,6 +22,11 @@ class ErrorManagement @Inject constructor() {
         return evaluateCause(e.throwable.cause)
     }
 
+    fun manageException(e: Throwable): CoinSwatchError {
+        Timber.Forest.d("CoinSwatchErrorManagement - manageOnException : $e")
+        return evaluateCause(e.cause)
+    }
+
     private fun evaluateCause(cause: Throwable?): CoinSwatchError {
         Timber.Forest.d("CoinSwatchErrorManagement - evaluateCause : $cause")
 

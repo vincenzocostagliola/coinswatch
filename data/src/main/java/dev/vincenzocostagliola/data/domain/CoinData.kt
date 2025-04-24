@@ -1,8 +1,6 @@
 package dev.vincenzocostagliola.data.domain
 
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
 import org.threeten.bp.OffsetDateTime
 
 data class CoinData(

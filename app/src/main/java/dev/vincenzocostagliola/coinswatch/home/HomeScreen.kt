@@ -16,7 +16,7 @@ import dev.vincenzocostagliola.designsystem.values.Dimens
 import timber.log.Timber
 
 @Composable
-fun HomeScreen(viewModel: HomeViewModel, navigationController: NavHostController) {
+internal fun HomeScreen(viewModel: HomeViewModel, navigationController: NavHostController) {
 
     val state: State<HomeScreenState> = viewModel.homeScreenState.collectAsState()
     when (val viewState = state.value) {
