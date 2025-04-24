@@ -15,6 +15,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavGraph
 import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
 import dev.vincenzocostagliola.designsystem.theme.CoinswatchTheme
@@ -44,6 +45,8 @@ class MainActivity : ComponentActivity() {
     @Composable
     private fun MainScreen() {
         val navController = rememberNavController()
-        NavGraph(navController = navController)
+        NavGraph(
+            navController = navController
+        )
     }
 }

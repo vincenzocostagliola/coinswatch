@@ -18,7 +18,7 @@ sealed class DetailScreenState {
 }
 
 sealed class DetailScreenEvents {
-    data class GetCoinData(val coinId: String) : DetailScreenEvents()
+    data class GetCoinData(val coinId: String?) : DetailScreenEvents()
 }
 
 @HiltViewModel

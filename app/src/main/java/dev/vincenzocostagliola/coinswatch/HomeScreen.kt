@@ -26,8 +26,8 @@ fun HomeScreen(viewModel: HomeViewModel, navigationController: NavHostController
 
         is HomeScreenState.Success -> {
             Progress(false)
-            ShowCoinList(viewState.list) {
-                navigationController.navigate(detailScreen)
+            ShowCoinList(viewState.list) { coinId ->
+                navigationController.navigate(NavigationRoute.DetailsScreen.createRoute(coinId))
             }
         }
     }
@@ -49,7 +49,7 @@ private fun ShowCoinList(list: List<Coin>, onClick: (String) -> Unit) {
         }
     }
 }
-
+/*
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
@@ -57,3 +57,5 @@ fun DefaultPreview() {
         // ShowCoinList(emptyList())
     }
 }
+
+ */
