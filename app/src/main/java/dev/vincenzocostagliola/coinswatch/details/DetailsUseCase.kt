@@ -3,7 +3,7 @@ package dev.vincenzocostagliola.coinswatch.details
 import androidx.compose.ui.text.intl.Locale
 import dev.vincenzocostagliola.data.domain.CoinData
 import dev.vincenzocostagliola.data.domain.CoinData.Image
-import dev.vincenzocostagliola.data.domain.CoinHistoricalData
+import dev.vincenzocostagliola.data.domain.CoinHistoricalData.PriceChartPoint
 import dev.vincenzocostagliola.data.domain.result.GetCoinDataResult
 import dev.vincenzocostagliola.data.domain.result.GetCoinDataResult.Failure
 import dev.vincenzocostagliola.data.domain.result.GetCoinHistoricalDataResult
@@ -21,7 +21,7 @@ import javax.inject.Inject
 sealed class CoinDataWithHistoryResult {
 
     data class CoinDataWithHistory(
-        val history: CoinHistoricalData,
+        val history: List<PriceChartPoint>,
         val marketCapRank: Int,
         val name: String,
         val id: String,
@@ -66,7 +66,7 @@ internal class DetailsUseCase @Inject constructor(
         coinData: GetCoinDataResult.Success
     ): CoinDataWithHistoryResult.CoinDataWithHistory =
         CoinDataWithHistoryResult.CoinDataWithHistory(
-            history = coinHistory.coinData,
+            history = coinHistory.coinData.prices.sortedByDescending { it.date },
             marketCapRank = coinData.coinData.marketCapRank,
             name = coinData.coinData.name,
             id = coinData.coinData.id,

@@ -9,22 +9,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
-import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.ListItem
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalUriHandler
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
@@ -32,6 +24,7 @@ import coil.compose.AsyncImage
 import dev.vincenzocostagliola.coinswatch.NavigationRoute
 import dev.vincenzocostagliola.coinswatch.R
 import dev.vincenzocostagliola.data.domain.CoinHistoricalData
+import dev.vincenzocostagliola.designsystem.composables.Chart
 import dev.vincenzocostagliola.designsystem.composables.CoinHistoryListItem
 import dev.vincenzocostagliola.designsystem.composables.NavigationListItem
 import dev.vincenzocostagliola.designsystem.composables.Progress
@@ -105,6 +98,14 @@ private fun ShowDetails(
 }
 
 @Composable
+fun ShowChart(history: List<CoinHistoricalData.PriceChartPoint>) {
+    val valuesList: List<Float> = history.map { it.value.toFloat() }
+    Timber.d("ChartComposable - prices: $valuesList")
+
+    Chart(list = valuesList)
+}
+
+@Composable
 private fun ShowDescription(description: String, goToDescription: (String) -> Unit) {
     NavigationListItem(
         textToShow = stringResource(R.string.description),
@@ -142,10 +143,10 @@ private fun ShowImage(imageUrl: String, name: String) {
 }
 
 
-private fun LazyListScope.ShowHistory(data: CoinHistoricalData) {
-    items(data.prices.size) { item ->
+private fun LazyListScope.ShowHistory(data: List<CoinHistoricalData.PriceChartPoint>) {
+    items(data.size) { item ->
         CoinHistoryListItem(
-            history = data.prices[item]
+            history = data[item]
         )
     }
 }
