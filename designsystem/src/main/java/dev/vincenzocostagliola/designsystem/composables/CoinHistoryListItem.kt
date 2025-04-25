@@ -10,12 +10,11 @@ import org.threeten.bp.format.DateTimeFormatter.ISO_DATE
 
 @Composable
 fun CoinHistoryListItem(history: PriceChartPoint) {
-        Column {
-            ListItem(
-                headlineContent = { Text(history.date.format(ISO_DATE)) },
-                supportingContent = { Text(history.value.toString()) }
-            )
-            HorizontalDivider()
-
-        }
+    Column {
+        ListItem(
+            headlineContent = { Text(history.date.format(ISO_DATE)) },
+            supportingContent = { Text(history.value.toString()) }
+        )
+        HorizontalDivider()
     }
+}

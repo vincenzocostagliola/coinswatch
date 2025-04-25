@@ -1,31 +1,29 @@
 package dev.vincenzocostagliola.coinswatch.details
 
-import android.credentials.CredentialDescription
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
-import dev.vincenzocostagliola.designsystem.theme.ExtraLight
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
-import dev.vincenzocostagliola.designsystem.composables.Progress
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import dev.vincenzocostagliola.data.domain.CoinHistoricalData
 import dev.vincenzocostagliola.designsystem.composables.CoinHistoryListItem
+import dev.vincenzocostagliola.designsystem.composables.Progress
 import dev.vincenzocostagliola.designsystem.composables.TopBar
+import dev.vincenzocostagliola.designsystem.theme.ExtraLight
 import dev.vincenzocostagliola.designsystem.values.Dimens
 import dev.vincenzocostagliola.designsystem.values.Dimens.iconDimensRegular
 
@@ -58,9 +56,12 @@ fun ShowDetails(
     modifier: Modifier = Modifier
 ) {
     Scaffold(
+        modifier = modifier
+            .padding(Dimens.XRegular)
+            .background(ExtraLight),
         topBar = {
             TopBar(
-                title = data.name + " - " + data.marketCapRank,
+                title = data.name + " - Market Cap Rank " + data.marketCapRank,
                 onBackButton = onBackPressed
             )
         }
@@ -69,13 +70,10 @@ fun ShowDetails(
             modifier = modifier
                 .padding(it)
                 .fillMaxSize()
-                .background(ExtraLight)
-
         ) {
-            ShowImage(data.image.small, data.name)
+            ShowImage(data.image.large, data.name)
             ShowDescription(data.description)
             ShowHistory(data.history)
-
         }
     }
 }
