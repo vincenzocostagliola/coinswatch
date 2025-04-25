@@ -1,6 +1,7 @@
 package dev.vincenzocostagliola.coinswatch.details
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -57,7 +58,6 @@ fun ShowDetails(
 ) {
     Scaffold(
         modifier = modifier
-            .padding(Dimens.XRegular)
             .background(ExtraLight),
         topBar = {
             TopBar(
@@ -70,6 +70,7 @@ fun ShowDetails(
             modifier = modifier
                 .padding(it)
                 .fillMaxSize()
+                .padding(Dimens.XRegular)
         ) {
             ShowImage(data.image.large, data.name)
             ShowDescription(data.description)
@@ -97,7 +98,11 @@ fun LazyListScope.ShowHistory(data: CoinHistoricalData) {
 fun LazyListScope.ShowImage(imageUrl: String, name: String) {
     items(1) {
         // TODO a placeholder is needed
-        Column(modifier = Modifier.fillMaxWidth()) {
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
             AsyncImage(
                 model = imageUrl,
                 modifier = Modifier
