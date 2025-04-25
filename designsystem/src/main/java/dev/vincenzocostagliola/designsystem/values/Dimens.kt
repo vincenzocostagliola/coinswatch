@@ -19,10 +19,14 @@ object Dimens {
     val bottomSheetRadius = 16.dp
     val homeTopBarRadius = 20.dp
 
+    val iconDimensSmall = 24.dp
     val iconDimensRegular = 48.dp
     val iconDimensLarge = 60.dp
 
     val genericButtonHeight = 43.dp
     val smallButtonHeight = 32.dp
     val smallButtonWidth = 120.dp
+
+    val buttonCornerShape = 16.dp
+    val defaultSpacer = 24.dp
 }

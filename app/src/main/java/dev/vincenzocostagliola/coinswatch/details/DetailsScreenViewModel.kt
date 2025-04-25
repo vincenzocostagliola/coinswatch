@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.vincenzocostagliola.coinswatch.details.CoinDataWithHistoryResult.CoinDataWithHistory
 import dev.vincenzocostagliola.data.error.CoinSwatchError
+import dev.vincenzocostagliola.data.error.DialogAction
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
@@ -20,6 +21,7 @@ internal sealed class DetailsScreenState {
 
 internal sealed class DetailsScreenEvents {
     data class GetCoinData(val coinId: String?) : DetailsScreenEvents()
+    data class PerformDialogAction(val dialogAction: DialogAction) : DetailsScreenEvents()
 }
 
 @HiltViewModel
@@ -31,6 +33,9 @@ internal class DetailsScreenViewModel @Inject constructor(
     private val currency = "eur"
     private val days = 7
 
+    //TODO remove, need to be passed toghether with dialog Action
+    private var savedCoinId: String? = null
+
     private val _detailsScreenState: MutableStateFlow<DetailsScreenState> =
         MutableStateFlow(DetailsScreenState.Loading)
     val detailsScreenState: StateFlow<DetailsScreenState>
@@ -40,11 +45,25 @@ internal class DetailsScreenViewModel @Inject constructor(
         viewModelScope.launch() {
             when (event) {
                 is DetailsScreenEvents.GetCoinData -> getCoinDataWithHistory(event.coinId)
+                is DetailsScreenEvents.PerformDialogAction -> performDialogAction(event.dialogAction)
             }
         }
     }
 
+    private suspend fun performDialogAction(action: DialogAction) {
+        when (action) {
+            DialogAction.Leave -> Unit
+            DialogAction.Quit -> {
+                // Perform a logout if signed or go out from the app
+                Unit
+            }
+
+            DialogAction.Retry -> getCoinDataWithHistory(savedCoinId)
+        }
+    }
+
     private suspend fun getCoinDataWithHistory(coinId: String?) {
+        savedCoinId = coinId
         coinId?.let {
             useCase.getCoinDataWithHistory(
                 coinId = coinId,

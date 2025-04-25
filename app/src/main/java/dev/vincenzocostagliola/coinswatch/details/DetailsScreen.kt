@@ -24,8 +24,11 @@ import coil.compose.AsyncImage
 import dev.vincenzocostagliola.coinswatch.NavigationRoute
 import dev.vincenzocostagliola.coinswatch.R
 import dev.vincenzocostagliola.data.domain.CoinHistoricalData
+import dev.vincenzocostagliola.data.error.DialogAction
+import dev.vincenzocostagliola.data.error.ErrorResources
 import dev.vincenzocostagliola.designsystem.composables.Chart
 import dev.vincenzocostagliola.designsystem.composables.CoinHistoryListItem
+import dev.vincenzocostagliola.designsystem.composables.ErrorDialog
 import dev.vincenzocostagliola.designsystem.composables.NavigationListItem
 import dev.vincenzocostagliola.designsystem.composables.Progress
 import dev.vincenzocostagliola.designsystem.composables.TopBar
@@ -49,7 +52,12 @@ internal fun DetailsScreen(
 
     val state: State<DetailsScreenState> = viewModel.detailsScreenState.collectAsState()
     when (val viewState = state.value) {
-        is DetailsScreenState.Error -> Unit
+        is DetailsScreenState.Error -> {
+            ShowError(viewState.error.newResources) {
+                viewModel.sendEvent(DetailsScreenEvents.PerformDialogAction(it))
+            }
+        }
+
         DetailsScreenState.Loading -> {
             Progress(true)
             viewModel.sendEvent(DetailsScreenEvents.GetCoinData(coinId))
@@ -60,6 +68,14 @@ internal fun DetailsScreen(
             ShowDetails(viewState.data, onBackPressed, goToDescription)
         }
     }
+}
+
+@Composable
+private fun ShowError(newResources: ErrorResources, performAction: (DialogAction) -> Unit) {
+    ErrorDialog(
+        errorResources = newResources,
+        performAction = performAction
+    )
 }
 
 @Composable
