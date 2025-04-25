@@ -26,7 +26,8 @@ sealed class CoinDataWithHistoryResult {
         val name: String,
         val id: String,
         val image: Image,
-        val description: String
+        val description: String,
+        val url: String?
     ) : CoinDataWithHistoryResult()
 
     data class Error(val error: CoinSwatchError) : CoinDataWithHistoryResult()
@@ -70,7 +71,9 @@ internal class DetailsUseCase @Inject constructor(
             name = coinData.coinData.name,
             id = coinData.coinData.id,
             image = coinData.coinData.image,
-            description = coinData.coinData.description.getLocalized()
+            description = coinData.coinData.description.getLocalized(),
+            url = coinData.coinData.url
+
         )
 
     private fun manageFailure(

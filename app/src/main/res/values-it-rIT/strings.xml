@@ -2,4 +2,5 @@
 <resources>
     <string name="app_name">CoinSwatch</string>
     <string name="description">descrizione</string>
+    <string name="homepage">Homepage</string>
 </resources>

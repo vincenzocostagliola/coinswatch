@@ -19,6 +19,7 @@ data class CoinData(
     val name: String,
     val previewListing: Boolean,
     val symbol: String,
+    val url: String?
 ) {
     data class Description(
         val en: String,

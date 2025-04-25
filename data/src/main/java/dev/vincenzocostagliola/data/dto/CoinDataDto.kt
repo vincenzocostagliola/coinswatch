@@ -323,6 +323,7 @@ data class CoinDataDto(
             name = name,
             previewListing = previewListing,
             symbol = symbol,
+            url = links.homepage.firstOrNull(),
         )
     }
 }

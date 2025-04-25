@@ -23,6 +23,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -36,6 +37,7 @@ import dev.vincenzocostagliola.designsystem.composables.Progress
 import dev.vincenzocostagliola.designsystem.composables.TopBar
 import dev.vincenzocostagliola.designsystem.theme.ExtraLight
 import dev.vincenzocostagliola.designsystem.values.Dimens
+import dev.vincenzocostagliola.designsystem.values.Dimens.iconDimensLarge
 import dev.vincenzocostagliola.designsystem.values.Dimens.iconDimensRegular
 import timber.log.Timber
 
@@ -91,6 +93,9 @@ private fun ShowDetails(
                 .padding(Dimens.XRegular)
         ) {
             ShowImage(data.image.large, data.name)
+            data.url?.let {
+                ShowHomeLink(it)
+            }
             ShowDescription(data.description, goToDescription)
             ShowHistory(data.history)
         }
@@ -120,6 +125,30 @@ private fun LazyListScope.ShowDescription(description: String, goToDescription: 
     }
 }
 
+private fun LazyListScope.ShowHomeLink(url: String) {
+    // TODO Remove items(1)
+    items(1) {
+        val localUriHandler = LocalUriHandler.current
+        Column {
+            ListItem(
+                headlineContent = { Text(stringResource(R.string.homepage)) },
+                trailingContent = {
+                    IconButton(
+                        onClick = { localUriHandler.openUri(url) }
+                    ) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.chevron_right),
+                            contentDescription = "",
+                            tint = Color(0xFF434C59)
+                        )
+                    }
+                }
+            )
+            HorizontalDivider()
+        }
+    }
+}
+
 private fun LazyListScope.ShowImage(imageUrl: String, name: String) {
     items(1) {
         // TODO a placeholder is needed
@@ -131,7 +160,7 @@ private fun LazyListScope.ShowImage(imageUrl: String, name: String) {
             AsyncImage(
                 model = imageUrl,
                 modifier = Modifier
-                    .size(iconDimensRegular),
+                    .size(iconDimensLarge),
                 contentScale = ContentScale.Fit,
                 contentDescription = name,
                 alignment = Alignment.Center
