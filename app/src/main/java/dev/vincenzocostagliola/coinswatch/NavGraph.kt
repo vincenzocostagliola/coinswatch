@@ -7,6 +7,8 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import dev.vincenzocostagliola.coinswatch.NavigationRoute.DescriptionScreen
+import dev.vincenzocostagliola.coinswatch.details.DescriptionScreen
 import dev.vincenzocostagliola.coinswatch.details.DetailsScreen
 import dev.vincenzocostagliola.coinswatch.details.DetailsScreenViewModel
 import dev.vincenzocostagliola.coinswatch.home.HomeScreen
@@ -25,6 +27,13 @@ sealed class NavigationRoute() {
         fun createRoute(coinId: String) = "$screenName?$argumentId=${coinId}"
         const val argumentId : String = "coinId"
         private val screenName :String = "detailScreen"
+        override val route: String = "$screenName?$argumentId={$argumentId}"
+    }
+
+    data object DescriptionScreen : NavigationRoute() {
+        fun createRoute(description: String) = "$screenName?$argumentId=${description}"
+        const val argumentId : String = "description"
+        private val screenName :String = "DescriptionScreen"
         override val route: String = "$screenName?$argumentId={$argumentId}"
     }
 }
@@ -47,6 +56,17 @@ fun NavGraph(navController: NavHostController) {
             val viewModel = hiltViewModel<DetailsScreenViewModel>()
             val onBackPressed: () -> Unit = { navController.popBackStack() }
             DetailsScreen(viewModel, coinId, onBackPressed)
+        }
+
+        composable(
+            route = NavigationRoute.DescriptionScreen.route,
+            arguments = listOf(navArgument(NavigationRoute.DescriptionScreen.argumentId) { type = NavType.StringType })
+        ) { backStackEntry ->
+            val description = backStackEntry.arguments?.getString(NavigationRoute.DescriptionScreen.argumentId) ?: ""
+            Timber.d("Coin Navigation - received Description = $description")
+
+            val onBackPressed: () -> Unit = { navController.popBackStack() }
+            DescriptionScreen( description, onBackPressed)
         }
 
     }
