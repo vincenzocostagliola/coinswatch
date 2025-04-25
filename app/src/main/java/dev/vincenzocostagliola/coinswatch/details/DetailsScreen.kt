@@ -14,6 +14,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
@@ -103,22 +104,26 @@ private fun ShowDetails(
 private fun LazyListScope.ShowDescription(description: String, goToDescription: (String) -> Unit) {
     // TODO Remove items(1)
     items(1) {
-        Column {
-            ListItem(
-                headlineContent = { Text(stringResource(R.string.description)) },
-                trailingContent = {
-                    IconButton(
-                        onClick = { goToDescription(description) }
-                    ) {
-                        Icon(
-                            painter = painterResource(id = R.drawable.chevron_right),
-                            contentDescription = "",
-                            tint = Color(0xFF434C59)
-                        )
+        Surface(
+            onClick = { goToDescription(description) }
+        ) {
+            Column {
+                ListItem(
+                    headlineContent = { Text(stringResource(R.string.description)) },
+                    trailingContent = {
+                        IconButton(
+                            onClick = {}
+                        ) {
+                            Icon(
+                                painter = painterResource(id = R.drawable.chevron_right),
+                                contentDescription = "",
+                                tint = Color(0xFF434C59)
+                            )
+                        }
                     }
-                }
-            )
-            HorizontalDivider()
+                )
+                HorizontalDivider()
+            }
         }
     }
 }
