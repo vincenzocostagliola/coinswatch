@@ -92,56 +92,52 @@ private fun ShowDetails(
                 .fillMaxSize()
                 .padding(Dimens.XRegular)
         ) {
-            ShowImage(data.image.large, data.name)
-            data.url?.let {
-                ShowHomeLink(it)
+            items(1) {
+                ShowImage(data.image.large, data.name)
+                data.url?.let {
+                    ShowHomeLink(it)
+                }
+                ShowDescription(data.description, goToDescription)
             }
-            ShowDescription(data.description, goToDescription)
             ShowHistory(data.history)
         }
     }
 }
 
-private fun LazyListScope.ShowDescription(description: String, goToDescription: (String) -> Unit) {
-    // TODO Remove items(1)
-    items(1) {
-        NavigationListItem(
-            textToShow = stringResource(R.string.description),
-            onClick = { goToDescription(description) }
-        )
-    }
+@Composable
+private fun ShowDescription(description: String, goToDescription: (String) -> Unit) {
+    NavigationListItem(
+        textToShow = stringResource(R.string.description),
+        onClick = { goToDescription(description) }
+    )
 }
 
-
-private fun LazyListScope.ShowHomeLink(url: String) {
-    // TODO Remove items(1)
-    items(1) {
-        val localUriHandler = LocalUriHandler.current
-        NavigationListItem(
-            textToShow = stringResource(R.string.homepage),
-            onClick = { localUriHandler.openUri(url) }
-        )
-    }
+@Composable
+private fun ShowHomeLink(url: String) {
+    val localUriHandler = LocalUriHandler.current
+    NavigationListItem(
+        textToShow = stringResource(R.string.homepage),
+        onClick = { localUriHandler.openUri(url) }
+    )
 }
 
-private fun LazyListScope.ShowImage(imageUrl: String, name: String) {
-    items(1) {
-        // TODO a placeholder is needed
-        Column(
-            modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            AsyncImage(
-                model = imageUrl,
-                modifier = Modifier
-                    .size(iconDimensLarge),
-                contentScale = ContentScale.Fit,
-                contentDescription = name,
-                alignment = Alignment.Center
+@Composable
+private fun ShowImage(imageUrl: String, name: String) {
+    // TODO a placeholder is needed
+    Column(
+        modifier = Modifier.fillMaxWidth(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        AsyncImage(
+            model = imageUrl,
+            modifier = Modifier
+                .size(iconDimensLarge),
+            contentScale = ContentScale.Fit,
+            contentDescription = name,
+            alignment = Alignment.Center
 
-            )
-        }
+        )
     }
 }
 
