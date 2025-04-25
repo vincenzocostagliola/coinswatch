@@ -47,9 +47,9 @@ internal fun DetailsScreen(
     coinId: String?,
     onBackPressed: () -> Unit,
 ) {
-    val goToDescription: (String) -> Unit = {
+    val goToDescription: (String) -> Unit = { description ->
         Timber.d("Description Navigation - sent")
-        navigationController.navigate(NavigationRoute.DescriptionScreen.createRoute(it))
+        navigationController.navigate(NavigationRoute.DescriptionScreen.createRoute(description))
     }
 
     val state: State<DetailsScreenState> = viewModel.detailsScreenState.collectAsState()

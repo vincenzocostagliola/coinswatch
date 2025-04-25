@@ -25,15 +25,15 @@ sealed class NavigationRoute() {
 
     data object DetailsScreen : NavigationRoute() {
         fun createRoute(coinId: String) = "$screenName?$argumentId=${coinId}"
-        const val argumentId : String = "coinId"
-        private val screenName :String = "detailScreen"
+        const val argumentId: String = "coinId"
+        private val screenName: String = "detailScreen"
         override val route: String = "$screenName?$argumentId={$argumentId}"
     }
 
     data object DescriptionScreen : NavigationRoute() {
         fun createRoute(description: String) = "$screenName?$argumentId=${description}"
-        const val argumentId : String = "description"
-        private val screenName :String = "DescriptionScreen"
+        const val argumentId: String = "description"
+        private val screenName: String = "DescriptionScreen"
         override val route: String = "$screenName?$argumentId={$argumentId}"
     }
 }
@@ -49,24 +49,35 @@ fun NavGraph(navController: NavHostController) {
 
         composable(
             route = NavigationRoute.DetailsScreen.route,
-            arguments = listOf(navArgument(NavigationRoute.DetailsScreen.argumentId) { type = NavType.StringType })
+            arguments = listOf(navArgument(NavigationRoute.DetailsScreen.argumentId) {
+                type = NavType.StringType
+            })
         ) { backStackEntry ->
-            val coinId = backStackEntry.arguments?.getString(NavigationRoute.DetailsScreen.argumentId)
+            val coinId =
+                backStackEntry.arguments?.getString(NavigationRoute.DetailsScreen.argumentId)
             Timber.d("Coin Navigation - received coinId = $coinId")
             val viewModel = hiltViewModel<DetailsScreenViewModel>()
             val onBackPressed: () -> Unit = { navController.popBackStack() }
-            DetailsScreen(viewModel, coinId, onBackPressed)
+            DetailsScreen(
+                viewModel = viewModel,
+                navigationController = navController,
+                coinId = coinId,
+                onBackPressed = onBackPressed
+            )
         }
 
         composable(
-            route = NavigationRoute.DescriptionScreen.route,
-            arguments = listOf(navArgument(NavigationRoute.DescriptionScreen.argumentId) { type = NavType.StringType })
+            route = DescriptionScreen.route,
+            arguments = listOf(navArgument(DescriptionScreen.argumentId) {
+                type = NavType.StringType
+            })
         ) { backStackEntry ->
-            val description = backStackEntry.arguments?.getString(NavigationRoute.DescriptionScreen.argumentId) ?: ""
+            val description =
+                backStackEntry.arguments?.getString(DescriptionScreen.argumentId) ?: ""
             Timber.d("Coin Navigation - received Description = $description")
 
             val onBackPressed: () -> Unit = { navController.popBackStack() }
-            DescriptionScreen( description, onBackPressed)
+            DescriptionScreen(description, onBackPressed)
         }
 
     }

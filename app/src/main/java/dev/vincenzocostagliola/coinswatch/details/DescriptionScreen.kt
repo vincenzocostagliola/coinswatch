@@ -17,7 +17,7 @@ import dev.vincenzocostagliola.designsystem.theme.ExtraLight
 import dev.vincenzocostagliola.designsystem.values.Dimens
 
 @Composable
-internal  fun DescriptionScreen(
+internal fun DescriptionScreen(
     description: String,
     onBackPressed: () -> Unit,
     modifier: Modifier = Modifier
