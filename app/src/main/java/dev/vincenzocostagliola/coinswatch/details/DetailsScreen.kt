@@ -4,11 +4,13 @@ import android.credentials.CredentialDescription
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListScope
 import dev.vincenzocostagliola.designsystem.theme.ExtraLight
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -63,8 +65,7 @@ fun ShowDetails(
             )
         }
     ) {
-
-        Column(
+        LazyColumn(
             modifier = modifier
                 .padding(it)
                 .fillMaxSize()
@@ -79,47 +80,44 @@ fun ShowDetails(
     }
 }
 
-@Composable
-fun ShowDescription(description: String) {
-    Text(description)
+fun LazyListScope.ShowDescription(description: String) {
+    items(1) {
+        Text(description)
+    }
 }
 
 
-@Composable
-fun ShowHistory(data: CoinHistoricalData) {
-    LazyColumn(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(horizontal = Dimens.XRegular)
-    ) {
-        items(data.prices.size) { item ->
-            CoinHistoryListItem(
-                history = data.prices[item]
+fun LazyListScope.ShowHistory(data: CoinHistoricalData) {
+    items(data.prices.size) { item ->
+        CoinHistoryListItem(
+            history = data.prices[item]
+        )
+    }
+}
+
+
+fun LazyListScope.ShowImage(imageUrl: String, name: String) {
+    items(1) {
+        // TODO a placeholder is needed
+        Column(modifier = Modifier.fillMaxWidth()) {
+            AsyncImage(
+                model = imageUrl,
+                modifier = Modifier
+                    .size(iconDimensRegular),
+                contentScale = ContentScale.Fit,
+                contentDescription = name,
+                alignment = Alignment.Center
+
             )
         }
     }
 }
 
-@Composable
-fun ShowImage(imageUrl: String, name: String) {
-    // TODO a placeholder is needed
-    AsyncImage(
-        model = imageUrl,
-        modifier = Modifier
-            .size(iconDimensRegular)
-            .fillMaxWidth(),
-        contentScale = ContentScale.Fit,
-        contentDescription = name,
-        alignment = Alignment.Center
-
-    )
-}
-
 @Preview
 @Composable
-fun ShowImagePreview(){
-    ShowImage(
+fun ShowImagePreview() {
+    /*ShowImage(
         imageUrl = "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1696501400",
         name = "Bitcoin"
-    )
+    )*/
 }
