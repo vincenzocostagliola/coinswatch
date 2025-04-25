@@ -1,6 +1,5 @@
 package dev.vincenzocostagliola.coinswatch.details
 
-import android.content.ClipDescription
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -38,7 +37,6 @@ import dev.vincenzocostagliola.designsystem.composables.TopBar
 import dev.vincenzocostagliola.designsystem.theme.ExtraLight
 import dev.vincenzocostagliola.designsystem.values.Dimens
 import dev.vincenzocostagliola.designsystem.values.Dimens.iconDimensLarge
-import dev.vincenzocostagliola.designsystem.values.Dimens.iconDimensRegular
 import timber.log.Timber
 
 
