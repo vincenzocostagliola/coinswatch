@@ -33,6 +33,7 @@ import dev.vincenzocostagliola.coinswatch.NavigationRoute
 import dev.vincenzocostagliola.coinswatch.R
 import dev.vincenzocostagliola.data.domain.CoinHistoricalData
 import dev.vincenzocostagliola.designsystem.composables.CoinHistoryListItem
+import dev.vincenzocostagliola.designsystem.composables.NavigationListItem
 import dev.vincenzocostagliola.designsystem.composables.Progress
 import dev.vincenzocostagliola.designsystem.composables.TopBar
 import dev.vincenzocostagliola.designsystem.theme.ExtraLight
@@ -104,51 +105,22 @@ private fun ShowDetails(
 private fun LazyListScope.ShowDescription(description: String, goToDescription: (String) -> Unit) {
     // TODO Remove items(1)
     items(1) {
-        Surface(
+        NavigationListItem(
+            textToShow = stringResource(R.string.description),
             onClick = { goToDescription(description) }
-        ) {
-            Column {
-                ListItem(
-                    headlineContent = { Text(stringResource(R.string.description)) },
-                    trailingContent = {
-                        IconButton(
-                            onClick = {}
-                        ) {
-                            Icon(
-                                painter = painterResource(id = R.drawable.chevron_right),
-                                contentDescription = "",
-                                tint = Color(0xFF434C59)
-                            )
-                        }
-                    }
-                )
-                HorizontalDivider()
-            }
-        }
+        )
     }
 }
+
 
 private fun LazyListScope.ShowHomeLink(url: String) {
     // TODO Remove items(1)
     items(1) {
         val localUriHandler = LocalUriHandler.current
-        Column {
-            ListItem(
-                headlineContent = { Text(stringResource(R.string.homepage)) },
-                trailingContent = {
-                    IconButton(
-                        onClick = { localUriHandler.openUri(url) }
-                    ) {
-                        Icon(
-                            painter = painterResource(id = R.drawable.chevron_right),
-                            contentDescription = "",
-                            tint = Color(0xFF434C59)
-                        )
-                    }
-                }
-            )
-            HorizontalDivider()
-        }
+        NavigationListItem(
+            textToShow = stringResource(R.string.homepage),
+            onClick = { localUriHandler.openUri(url) }
+        )
     }
 }
 

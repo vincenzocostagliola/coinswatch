@@ -6,19 +6,20 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.painterResource
 import dev.vincenzocostagliola.designsystem.R
 import dev.vincenzocostagliola.designsystem.theme.Dark
 
 @Composable
-fun NavigationListItem(textToShow: String, description: String, goTo: (String) -> Unit) {
+fun NavigationListItem(textToShow: String, onClick: () -> Unit) {
         Surface(
-            onClick = { goTo(description) }
+            onClick = { onClick() }
         ) {
             Column {
                 ListItem(
-                    headlineContent = { textToShow },
+                    headlineContent = { Text(textToShow) },
                     trailingContent = {
                         IconButton(
                             onClick = {}
