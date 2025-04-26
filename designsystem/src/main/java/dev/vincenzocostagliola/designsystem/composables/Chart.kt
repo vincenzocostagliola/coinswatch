@@ -12,12 +12,14 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.vincenzocostagliola.designsystem.theme.Pink80
 import dev.vincenzocostagliola.designsystem.theme.Purple80
+import dev.vincenzocostagliola.designsystem.utils.formatPricesAsEuro
 import dev.vincenzocostagliola.designsystem.utils.getSignificantPrices
 import dev.vincenzocostagliola.designsystem.values.Dimens.Regular
 import dev.vincenzocostagliola.designsystem.values.Dimens.XSmall
@@ -73,6 +75,7 @@ fun ShowPrices(prices: List<String>, modifier: Modifier) {
         modifier = modifier
             .fillMaxHeight()
             .padding(XSmall),
+        horizontalAlignment = Alignment.End,
         verticalArrangement = Arrangement.SpaceBetween
     ) {
 
@@ -148,6 +151,6 @@ private fun ShowChart() {
         modifier = Modifier,
         chartPricesPoints = values,
         chartDates = datesList,
-        chartFormattedPrices = getSignificantPrices(values)
+        chartFormattedPrices = values.getSignificantPrices().formatPricesAsEuro()
     )
 }

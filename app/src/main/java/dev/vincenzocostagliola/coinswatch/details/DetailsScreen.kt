@@ -1,15 +1,12 @@
 package dev.vincenzocostagliola.coinswatch.details
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
@@ -26,18 +23,16 @@ import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import dev.vincenzocostagliola.coinswatch.NavigationRoute
 import dev.vincenzocostagliola.coinswatch.R
-import dev.vincenzocostagliola.data.domain.CoinHistoricalData
 import dev.vincenzocostagliola.data.error.DialogAction
-import dev.vincenzocostagliola.data.error.DialogAction.Leave
-import dev.vincenzocostagliola.data.error.DialogAction.Retry
 import dev.vincenzocostagliola.data.error.ErrorResources
 import dev.vincenzocostagliola.designsystem.composables.Chart
-import dev.vincenzocostagliola.designsystem.composables.CoinHistoryListItem
 import dev.vincenzocostagliola.designsystem.composables.ErrorDialog
 import dev.vincenzocostagliola.designsystem.composables.NavigationListItem
 import dev.vincenzocostagliola.designsystem.composables.Progress
 import dev.vincenzocostagliola.designsystem.composables.TopBar
 import dev.vincenzocostagliola.designsystem.theme.ExtraLight
+import dev.vincenzocostagliola.designsystem.utils.formatPricesAsEuro
+import dev.vincenzocostagliola.designsystem.utils.getSignificantPrices
 import dev.vincenzocostagliola.designsystem.values.Dimens
 import dev.vincenzocostagliola.designsystem.values.Dimens.iconDimensLarge
 import org.threeten.bp.OffsetDateTime
@@ -119,14 +114,23 @@ private fun ShowDetails(
 }
 
 @Composable
-fun ShowChart(history: List<CoinHistoricalData.PriceChartPoint>) {
-    val valuesList: List<Float> = history.map { it.value.toFloat() }
-    val datesList: List<OffsetDateTime> = history.map { it.date }.distinctBy { it.toLocalDate() }
-    Timber.d("ChartComposable - prices: $valuesList")
-    Timber.d("ChartComposable - datesList: $datesList")
-    Timber.d("ChartComposable - datesList size: ${datesList.size}")
+fun ShowChart(history: List<CoinHistory>) {
+    val chartPricesPoints: List<Float> = history.map { it.chartPrice }
+    val chartDates: List<OffsetDateTime> = history.map { it.date }.distinctBy { it.toLocalDate() }
+    val chartFormattedPrices: List<String> = history.map { it.significantPrices }
+        .getSignificantPrices()
+        .sortedDescending()
+        .formatPricesAsEuro()
 
-    Chart(list = valuesList, dates = datesList)
+    Timber.d("ChartComposable - prices: $chartPricesPoints")
+    Timber.d("ChartComposable - datesList: $chartDates")
+    Timber.d("ChartComposable - chartFormattedPrices: $chartFormattedPrices")
+
+    Chart(
+        chartPricesPoints = chartPricesPoints,
+        chartDates = chartDates,
+        chartFormattedPrices = chartFormattedPrices
+    )
 }
 
 @Composable
@@ -162,15 +166,6 @@ private fun ShowImage(imageUrl: String, name: String) {
             contentDescription = name,
             alignment = Alignment.Center
 
-        )
-    }
-}
-
-
-private fun LazyListScope.ShowHistory(data: List<CoinHistoricalData.PriceChartPoint>) {
-    items(data.size) { item ->
-        CoinHistoryListItem(
-            history = data[item]
         )
     }
 }
