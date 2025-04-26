@@ -73,7 +73,7 @@ internal fun DetailsScreen(
 }
 
 @Composable
-internal fun ShowError(newResources: ErrorResources, performAction: (DialogAction) -> Unit) {
+private fun ShowError(newResources: ErrorResources, performAction: (DialogAction) -> Unit) {
     ErrorDialog(
         errorResources = newResources,
         performAction = performAction

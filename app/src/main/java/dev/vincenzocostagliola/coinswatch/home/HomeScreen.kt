@@ -9,7 +9,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import dev.vincenzocostagliola.coinswatch.NavigationRoute
-import dev.vincenzocostagliola.coinswatch.details.ShowError
 import dev.vincenzocostagliola.data.domain.Coin
 import dev.vincenzocostagliola.data.error.DialogAction
 import dev.vincenzocostagliola.data.error.ErrorResources
