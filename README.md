@@ -24,24 +24,85 @@ CoinSWatch is a modern Android app built with **Jetpack Compose** that allows us
 ```
 CoinSWatch/
 ├── app/                # Main application module (screens, navigation)
-│   ├── ui/
-│   │   ├── CryptoListScreen.kt
-│   │   └── CryptoDetailsScreen.kt
-│   ├── di/              # Hilt modules
-│   └── MainActivity.kt
+│   ├── details/        # Crypto details screen (description, prices, etc.)
+│   ├── home/           # Home screen showing the top 10 crypto list
+│   ├── CoinSwatchApplication.kt  # Hilt Application class
+│   ├── LoggingSetup.kt           # Timber (and Sentry tbd) logger setup
+│   ├── MainActivity.kt           # App launcher and container
+│   └── NavGraph.kt               # Navigation graph between screens
 │
-├── data/                # Data module (repositories, network, models)
-│   ├── api/             # Retrofit API services
-│   ├── model/           # Data models (Crypto, PriceHistory, etc.)
-│   ├── repository/      # Repository pattern implementations
-│   └── utils/           # Serialization and error handling helpers
+├── data/               # Data module (domain models, network, error handling)
+│   ├── DataModule.kt   # Hilt module for providing data dependencies
+│   │
+│   ├── domain/         # Domain models (pure app logic)
+│   │
+│   ├── dto/            # Data Transfer Objects for API
+│   │
+│   ├── error/          # Error handling system
+│   │
+│   └── net/            # Networking layer
 │
-├── designsystem/        # UI styles, components, theming
-│   ├── theme/           # Colors, Typography, Shapes
-│   └── components/      # Custom Compose UI components
+├── designsystem/       # UI styles, components, theming
+│   ├── theme/          # Colors, Typography, Shapes
+│   ├── composables/    # Custom Compose UI components
+│   └── values/         # Custom values for composables
 │
-└── build.gradle         # Gradle build scripts
+└── build.gradle        # Gradle build scripts
+
+---
+
+## 🔀 Navigation Flow
+
 ```
+[HomeScreen]
+     ↓ (on Crypto Click)
+[DetailsScreen]
+     ↓ (view Description)
+[DescriptionScreen]
+```
+
+### Flow Description:
+
+- **HomeScreen**:  
+  Displays a list of the top 10 cryptocurrencies.  
+  ➔ When a crypto is clicked, it navigates to:
+
+- **DetailsScreen**:  
+  Shows selected crypto's info (website link, historical price, etc.).  
+  ➔ From here, users can open:
+
+- **DescriptionScreen**:  
+  Displays an extended description about the cryptocurrency.
+
+---
+
+### ✨ Visual Diagram
+
+```
+ ┌─────────────┐
+ │ HomeScreen  │
+ └─────┬───────┘
+       │
+    Select Crypto
+       │
+ ┌─────▼───────┐
+ │ DetailsScreen│
+ └─────┬───────┘
+       │
+   View Description
+       │
+ ┌─────▼──────────┐
+ │ DescriptionScreen │
+ └─────────────────┘
+```
+
+---
+
+### 📚 Navigation Management
+
+- All navigation between these screens is handled via `NavGraph.kt`.
+- Using **Hilt** for injecting ViewModels across navigation destinations.
+- State is passed via `savedStateHandle` or safe navigation arguments where needed.
 
 ---
 
