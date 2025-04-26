@@ -6,7 +6,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.vincenzocostagliola.data.domain.Coin
 import dev.vincenzocostagliola.data.domain.result.GetCoinsResult
 import dev.vincenzocostagliola.data.error.CoinSwatchError
+import dev.vincenzocostagliola.data.error.DialogAction
 import dev.vincenzocostagliola.data.net.repository.Repository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
@@ -22,6 +24,8 @@ sealed class HomeScreenState {
 
 sealed class HomeScreenEvents {
     data object GetCoinsData : HomeScreenEvents()
+    data class PerformDialogAction(val dialogAction: DialogAction) : HomeScreenEvents()
+
 }
 
 @HiltViewModel
@@ -42,7 +46,20 @@ internal class HomeViewModel @Inject constructor(
         viewModelScope.launch() {
             when (event) {
                 HomeScreenEvents.GetCoinsData -> getCoinsWithMarketData()
+                is HomeScreenEvents.PerformDialogAction -> performDialogAction(event.dialogAction)
             }
+        }
+    }
+
+    private suspend fun performDialogAction(action: DialogAction) {
+        when (action) {
+            DialogAction.Leave -> Unit
+            DialogAction.Quit -> {
+                // Perform a logout if signed or go out from the app
+                Unit
+            }
+
+            DialogAction.Retry -> getCoinsWithMarketData()
         }
     }
 
@@ -60,15 +77,16 @@ internal class HomeViewModel @Inject constructor(
     }
 
     private fun executeCollect(result: GetCoinsResult) {
-        when (result) {
-            is GetCoinsResult.Failure -> _homeScreenState.update {
-                HomeScreenState.Error(result.error)
-            }
+        with(Dispatchers.Main) {
+            when (result) {
+                is GetCoinsResult.Failure -> _homeScreenState.update {
+                    HomeScreenState.Error(result.error)
+                }
 
-            is GetCoinsResult.Success -> _homeScreenState.update {
-                HomeScreenState.Success(result.coinList)
+                is GetCoinsResult.Success -> _homeScreenState.update {
+                    HomeScreenState.Success(result.coinList)
+                }
             }
         }
     }
-
 }

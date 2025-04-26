@@ -9,8 +9,12 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import dev.vincenzocostagliola.coinswatch.NavigationRoute
+import dev.vincenzocostagliola.coinswatch.details.ShowError
 import dev.vincenzocostagliola.data.domain.Coin
+import dev.vincenzocostagliola.data.error.DialogAction
+import dev.vincenzocostagliola.data.error.ErrorResources
 import dev.vincenzocostagliola.designsystem.composables.CoinShortInfoListItem
+import dev.vincenzocostagliola.designsystem.composables.ErrorDialog
 import dev.vincenzocostagliola.designsystem.composables.Progress
 import dev.vincenzocostagliola.designsystem.values.Dimens
 import timber.log.Timber
@@ -20,7 +24,11 @@ internal fun HomeScreen(viewModel: HomeViewModel, navigationController: NavHostC
 
     val state: State<HomeScreenState> = viewModel.homeScreenState.collectAsState()
     when (val viewState = state.value) {
-        is HomeScreenState.Error -> Unit
+        is HomeScreenState.Error -> {
+            ShowError(viewState.error.newResources) {
+                viewModel.sendEvent(HomeScreenEvents.PerformDialogAction(it))
+            }
+        }
         HomeScreenState.Loading -> {
             Progress(true)
             viewModel.sendEvent(HomeScreenEvents.GetCoinsData)
@@ -34,6 +42,14 @@ internal fun HomeScreen(viewModel: HomeViewModel, navigationController: NavHostC
             }
         }
     }
+}
+
+@Composable
+private fun ShowError(newResources: ErrorResources, performAction: (DialogAction) -> Unit) {
+    ErrorDialog(
+        errorResources = newResources,
+        performAction = performAction
+    )
 }
 
 @Composable

@@ -25,6 +25,8 @@ import dev.vincenzocostagliola.coinswatch.NavigationRoute
 import dev.vincenzocostagliola.coinswatch.R
 import dev.vincenzocostagliola.data.domain.CoinHistoricalData
 import dev.vincenzocostagliola.data.error.DialogAction
+import dev.vincenzocostagliola.data.error.DialogAction.Leave
+import dev.vincenzocostagliola.data.error.DialogAction.Retry
 import dev.vincenzocostagliola.data.error.ErrorResources
 import dev.vincenzocostagliola.designsystem.composables.Chart
 import dev.vincenzocostagliola.designsystem.composables.CoinHistoryListItem
@@ -71,7 +73,7 @@ internal fun DetailsScreen(
 }
 
 @Composable
-private fun ShowError(newResources: ErrorResources, performAction: (DialogAction) -> Unit) {
+internal fun ShowError(newResources: ErrorResources, performAction: (DialogAction) -> Unit) {
     ErrorDialog(
         errorResources = newResources,
         performAction = performAction

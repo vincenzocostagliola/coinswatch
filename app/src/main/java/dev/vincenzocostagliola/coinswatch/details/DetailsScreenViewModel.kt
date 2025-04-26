@@ -6,6 +6,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.vincenzocostagliola.coinswatch.details.CoinDataWithHistoryResult.CoinDataWithHistory
 import dev.vincenzocostagliola.data.error.CoinSwatchError
 import dev.vincenzocostagliola.data.error.DialogAction
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
@@ -33,7 +34,7 @@ internal class DetailsScreenViewModel @Inject constructor(
     private val currency = "eur"
     private val days = 7
 
-    //TODO remove, need to be passed toghether with dialog Action
+    //TODO remove, need to be passed together with dialog Action
     private var savedCoinId: String? = null
 
     private val _detailsScreenState: MutableStateFlow<DetailsScreenState> =
@@ -63,6 +64,10 @@ internal class DetailsScreenViewModel @Inject constructor(
     }
 
     private suspend fun getCoinDataWithHistory(coinId: String?) {
+        _detailsScreenState.update {
+            DetailsScreenState.Loading
+        }
+
         savedCoinId = coinId
         coinId?.let {
             useCase.getCoinDataWithHistory(
@@ -79,13 +84,15 @@ internal class DetailsScreenViewModel @Inject constructor(
     }
 
     private fun executeCollect(result: CoinDataWithHistoryResult) {
-        when (result) {
-            is CoinDataWithHistoryResult.Error -> _detailsScreenState.update {
-                DetailsScreenState.Error(result.error)
-            }
+        with(Dispatchers.Main) {
+            when (result) {
+                is CoinDataWithHistoryResult.Error -> _detailsScreenState.update {
+                    DetailsScreenState.Error(result.error)
+                }
 
-            is CoinDataWithHistoryResult.CoinDataWithHistory -> _detailsScreenState.update {
-                DetailsScreenState.Success(result)
+                is CoinDataWithHistoryResult.CoinDataWithHistory -> _detailsScreenState.update {
+                    DetailsScreenState.Success(result)
+                }
             }
         }
     }
