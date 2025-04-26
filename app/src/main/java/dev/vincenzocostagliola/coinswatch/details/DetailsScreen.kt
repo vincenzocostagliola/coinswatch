@@ -37,6 +37,7 @@ import dev.vincenzocostagliola.designsystem.composables.TopBar
 import dev.vincenzocostagliola.designsystem.theme.ExtraLight
 import dev.vincenzocostagliola.designsystem.values.Dimens
 import dev.vincenzocostagliola.designsystem.values.Dimens.iconDimensLarge
+import org.threeten.bp.OffsetDateTime
 import timber.log.Timber
 
 
@@ -109,8 +110,10 @@ private fun ShowDetails(
                     ShowHomeLink(it)
                 }
                 ShowDescription(data.description, goToDescription)
+                ShowChart(data.history)
             }
-            ShowHistory(data.history)
+            //ShowHistory(data.history)
+
         }
     }
 }
@@ -118,9 +121,12 @@ private fun ShowDetails(
 @Composable
 fun ShowChart(history: List<CoinHistoricalData.PriceChartPoint>) {
     val valuesList: List<Float> = history.map { it.value.toFloat() }
+    val datesList: List<OffsetDateTime> = history.map { it.date }.distinctBy { it.toLocalDate() }
     Timber.d("ChartComposable - prices: $valuesList")
+    Timber.d("ChartComposable - datesList: $datesList")
+    Timber.d("ChartComposable - datesList size: ${datesList.size}")
 
-    Chart(list = valuesList)
+    Chart(list = valuesList, dates = datesList)
 }
 
 @Composable
