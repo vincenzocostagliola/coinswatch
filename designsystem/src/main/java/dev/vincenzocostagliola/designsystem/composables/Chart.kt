@@ -18,7 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.vincenzocostagliola.designsystem.theme.Pink80
 import dev.vincenzocostagliola.designsystem.theme.Purple80
-import dev.vincenzocostagliola.designsystem.utils.formatPricesAsEuro
+import dev.vincenzocostagliola.designsystem.utils.getSignificantPrices
 import dev.vincenzocostagliola.designsystem.values.Dimens.Regular
 import dev.vincenzocostagliola.designsystem.values.Dimens.XSmall
 import org.threeten.bp.OffsetDateTime
@@ -28,8 +28,13 @@ import org.threeten.bp.format.FormatStyle
 import timber.log.Timber
 
 @Composable
-fun Chart(modifier: Modifier = Modifier, list: List<Float>, dates: List<OffsetDateTime>) {
-    val zipList: List<Pair<Float, Float>> = list.zipWithNext()
+fun Chart(
+    modifier: Modifier = Modifier,
+    chartPricesPoints: List<Float>,
+    chartDates: List<OffsetDateTime>,
+    chartFormattedPrices: List<String>
+) {
+    val zipList: List<Pair<Float, Float>> = chartPricesPoints.zipWithNext()
     Timber.d("ChartComposable - prices: $zipList")
 
     Column(
@@ -43,8 +48,8 @@ fun Chart(modifier: Modifier = Modifier, list: List<Float>, dates: List<OffsetDa
                 .height(IntrinsicSize.Min)
         ) {
 
-            ShowPrices(list, modifier)
-            DrawCanvases(zipList, list)
+            ShowPrices(chartFormattedPrices, modifier)
+            DrawCanvases(zipList, chartPricesPoints)
         }
         Row(
             modifier = modifier
@@ -52,7 +57,7 @@ fun Chart(modifier: Modifier = Modifier, list: List<Float>, dates: List<OffsetDa
                 .padding(top = Regular),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            dates.forEach {
+            chartDates.forEach {
                 Text(
                     text = it.format(dateFormatter),
                     style = extraSmallText
@@ -63,43 +68,21 @@ fun Chart(modifier: Modifier = Modifier, list: List<Float>, dates: List<OffsetDa
 }
 
 @Composable
-fun ShowPrices(prices: List<Float>, modifier: Modifier) {
+fun ShowPrices(prices: List<String>, modifier: Modifier) {
     Column(
         modifier = modifier
             .fillMaxHeight()
             .padding(XSmall),
         verticalArrangement = Arrangement.SpaceBetween
     ) {
-        val pricesToShow = getSignificantPrices(prices)
 
-        pricesToShow.forEach {
+        prices.forEach {
             Text(
                 text = it.toString(),
                 style = extraSmallText
             )
         }
     }
-}
-
-fun getSignificantPrices(prices: List<Float>): List<String> {
-    if (prices.isEmpty()) return emptyList()
-
-    val sorted = prices.sorted()
-    val min = sorted.first()
-    val max = sorted.last()
-
-    return if (min == max) {
-        // all values are the same
-        formatPricesAsEuro(List(10) { min })
-    } else {
-        val step = (sorted.size - 1) / 9.0  // 9 steps between 10 values
-        formatPricesAsEuro(List(10) { i ->
-            val index = (i * step).toInt().coerceIn(0, sorted.lastIndex)
-            sorted[index]
-        })
-    }
-
-
 }
 
 @Composable
@@ -163,7 +146,8 @@ private fun ShowChart() {
 
     Chart(
         modifier = Modifier,
-        list = values,
-        dates = datesList
+        chartPricesPoints = values,
+        chartDates = datesList,
+        chartFormattedPrices = getSignificantPrices(values)
     )
 }
