@@ -55,7 +55,7 @@ fun NavGraph(navController: NavHostController) {
         ) { backStackEntry ->
             val coinId =
                 backStackEntry.arguments?.getString(NavigationRoute.DetailsScreen.argumentId)
-            Timber.d("Coin Navigation - received coinId = $coinId")
+            Timber.d("Navigation - received coinId = $coinId")
             val viewModel = hiltViewModel<DetailsScreenViewModel>()
             val onBackPressed: () -> Unit = { navController.popBackStack() }
             DetailsScreen(
@@ -74,7 +74,7 @@ fun NavGraph(navController: NavHostController) {
         ) { backStackEntry ->
             val description =
                 backStackEntry.arguments?.getString(DescriptionScreen.argumentId) ?: ""
-            Timber.d("Coin Navigation - received Description = $description")
+            Timber.d("Navigation - received Description = $description")
 
             val onBackPressed: () -> Unit = { navController.popBackStack() }
             DescriptionScreen(description, onBackPressed)
