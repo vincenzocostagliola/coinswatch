@@ -7,38 +7,16 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import dev.vincenzocostagliola.coinswatch.NavigationRoute.DescriptionScreen
-import dev.vincenzocostagliola.coinswatch.details.DescriptionScreen
-import dev.vincenzocostagliola.coinswatch.details.DetailsScreen
-import dev.vincenzocostagliola.coinswatch.details.DetailsScreenViewModel
+import dev.vincenzocostagliola.coindetails.ui.DescriptionScreen
 import dev.vincenzocostagliola.coinswatch.home.HomeScreen
 import dev.vincenzocostagliola.coinswatch.home.HomeViewModel
+import dev.vincenzocostagliola.data.navigation.NavigationRoute
+import dev.vincenzocostagliola.coindetails.ui.DetailsScreen
+import dev.vincenzocostagliola.coindetails.ui.DetailsScreenViewModel
+import dev.vincenzocostagliola.data.navigation.NavigationRoute.DescriptionScreen
 import timber.log.Timber
 import java.net.URLDecoder
 import java.nio.charset.StandardCharsets
-
-
-sealed class NavigationRoute() {
-    abstract val route: String
-
-    data object Home : NavigationRoute() {
-        override val route: String = "Home"
-    }
-
-    data object DetailsScreen : NavigationRoute() {
-        fun createRoute(coinId: String) = "$screenName?$argumentId=${coinId}"
-        const val argumentId: String = "coinId"
-        private val screenName: String = "DetailScreen"
-        override val route: String = "$screenName?$argumentId={$argumentId}"
-    }
-
-    data object DescriptionScreen : NavigationRoute() {
-        fun createRoute(description: String) = "$screenName?$argumentId=${description}"
-        const val argumentId: String = "description"
-        private const val screenName: String = "DescriptionScreen"
-        override val route: String = "$screenName?$argumentId={$argumentId}"
-    }
-}
 
 
 @Composable
@@ -71,12 +49,12 @@ fun NavGraph(navController: NavHostController) {
 
         composable(
             route = DescriptionScreen.route,
-            arguments = listOf(navArgument(DescriptionScreen.argumentId) {
+            arguments = listOf(navArgument(NavigationRoute.DescriptionScreen.argumentId) {
                 type = NavType.StringType
             })
         ) { backStackEntry ->
             val description =
-                backStackEntry.arguments?.getString(DescriptionScreen.argumentId)?.let {
+                backStackEntry.arguments?.getString(NavigationRoute.DescriptionScreen.argumentId)?.let {
                     URLDecoder.decode(it, StandardCharsets.UTF_8.toString())
                 } ?: ""
             Timber.d("Navigation - received Description = $description")

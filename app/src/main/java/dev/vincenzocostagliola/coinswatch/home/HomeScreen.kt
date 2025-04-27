@@ -8,10 +8,10 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
-import dev.vincenzocostagliola.coinswatch.NavigationRoute
 import dev.vincenzocostagliola.data.domain.Coin
 import dev.vincenzocostagliola.data.error.DialogAction
 import dev.vincenzocostagliola.data.error.ErrorResources
+import dev.vincenzocostagliola.data.navigation.NavigationRoute
 import dev.vincenzocostagliola.designsystem.composables.CoinShortInfoListItem
 import dev.vincenzocostagliola.designsystem.composables.ErrorDialog
 import dev.vincenzocostagliola.designsystem.composables.Progress

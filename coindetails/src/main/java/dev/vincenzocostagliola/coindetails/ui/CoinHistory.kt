@@ -1,4 +1,4 @@
-package dev.vincenzocostagliola.coinswatch.details
+package dev.vincenzocostagliola.coindetails.ui
 
 import org.threeten.bp.OffsetDateTime
 

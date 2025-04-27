@@ -1,9 +1,9 @@
-package dev.vincenzocostagliola.coinswatch.details
+package dev.vincenzocostagliola.coindetails.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dev.vincenzocostagliola.coinswatch.details.CoinDataWithHistoryResult.CoinDataWithHistory
+import dev.vincenzocostagliola.coindetails.ui.CoinDataWithHistoryResult.CoinDataWithHistory
 import dev.vincenzocostagliola.data.error.CoinSwatchError
 import dev.vincenzocostagliola.data.error.DialogAction
 import kotlinx.coroutines.Dispatchers
@@ -14,20 +14,20 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
-internal sealed class DetailsScreenState {
+ sealed class DetailsScreenState {
     data object Loading : DetailsScreenState()
     data class Success(val data: CoinDataWithHistory) : DetailsScreenState()
     data class Error(val error: CoinSwatchError) : DetailsScreenState()
     data object GoBack : DetailsScreenState()
 }
 
-internal sealed class DetailsScreenEvents {
+ sealed class DetailsScreenEvents {
     data class GetCoinData(val coinId: String?) : DetailsScreenEvents()
     data class PerformDialogAction(val dialogAction: DialogAction) : DetailsScreenEvents()
 }
 
 @HiltViewModel
-internal class DetailsScreenViewModel @Inject constructor(
+class DetailsScreenViewModel @Inject constructor(
     private val useCase: DetailsUseCase
 ) : ViewModel() {
 
@@ -95,7 +95,7 @@ internal class DetailsScreenViewModel @Inject constructor(
                     DetailsScreenState.Error(result.error)
                 }
 
-                is CoinDataWithHistoryResult.CoinDataWithHistory -> _detailsScreenState.update {
+                is CoinDataWithHistory -> _detailsScreenState.update {
                     DetailsScreenState.Success(result)
                 }
             }

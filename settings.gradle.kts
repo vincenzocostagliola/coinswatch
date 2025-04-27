@@ -23,3 +23,4 @@ rootProject.name = "coinswatch"
 include(":app")
 include(":data")
 include(":designsystem")
+include(":coindetails")

@@ -1,4 +1,4 @@
-package dev.vincenzocostagliola.coinswatch.details
+package dev.vincenzocostagliola.coindetails.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -11,13 +11,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import dev.vincenzocostagliola.coinswatch.R
+import dev.vincenzocostagliola.coindetails.R
 import dev.vincenzocostagliola.designsystem.composables.TopBar
 import dev.vincenzocostagliola.designsystem.theme.ExtraLight
 import dev.vincenzocostagliola.designsystem.values.Dimens
 
 @Composable
-internal fun DescriptionScreen(
+fun DescriptionScreen(
     description: String,
     onBackPressed: () -> Unit,
     modifier: Modifier = Modifier

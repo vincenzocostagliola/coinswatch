@@ -1,4 +1,4 @@
-package dev.vincenzocostagliola.coinswatch.details
+package dev.vincenzocostagliola.coindetails.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -21,12 +21,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
-import dev.vincenzocostagliola.coinswatch.NavigationRoute
-import dev.vincenzocostagliola.coinswatch.R
-import dev.vincenzocostagliola.coinswatch.details.DetailsScreenEvents.GetCoinData
-import dev.vincenzocostagliola.coinswatch.details.DetailsScreenEvents.PerformDialogAction
+import dev.vincenzocostagliola.coindetails.R
 import dev.vincenzocostagliola.data.error.DialogAction
 import dev.vincenzocostagliola.data.error.ErrorResources
+import dev.vincenzocostagliola.data.navigation.NavigationRoute
 import dev.vincenzocostagliola.designsystem.composables.Chart
 import dev.vincenzocostagliola.designsystem.composables.ErrorDialog
 import dev.vincenzocostagliola.designsystem.composables.NavigationListItem
@@ -41,7 +39,7 @@ import java.nio.charset.StandardCharsets
 
 
 @Composable
-internal fun DetailsScreen(
+fun DetailsScreen(
     viewModel: DetailsScreenViewModel,
     navigationController: NavHostController,
     coinId: String?,
@@ -61,13 +59,13 @@ internal fun DetailsScreen(
     when (viewState) {
         is DetailsScreenState.Error -> {
             ShowError(viewState.error.newResources) {
-                viewModel.sendEvent(PerformDialogAction(it))
+                viewModel.sendEvent(DetailsScreenEvents.PerformDialogAction(it))
             }
         }
 
         DetailsScreenState.Loading -> {
             Progress(true)
-            viewModel.sendEvent(GetCoinData(coinId))
+            viewModel.sendEvent(DetailsScreenEvents.GetCoinData(coinId))
         }
 
         is DetailsScreenState.Success -> {
