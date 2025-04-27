@@ -3,15 +3,14 @@ agp = "8.9.2"
 hiltNavigationCompose = "1.2.0"
 kotlin = "2.0.21"
 coreKtx = "1.16.0"
+dagger_hilt = "2.51.1"
 
 junit = "4.13.2"
 junitVersion = "1.2.1"
 
 lifecycleRuntimeKtx = "2.8.7"
-activityCompose = "1.10.1"
 navigationCompose = "2.8.9"
 composeBom = "2025.04.01"
-dagger_hilt = "2.51.1"
 
 timber = "5.0.1"
 threeTen = "1.6.1"
@@ -44,7 +43,7 @@ androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit
 
 #Compose
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
-androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
+androidx-activity-compose = { group = "androidx.activity", name = "activity-compose" }
 androidx-ui = { group = "androidx.compose.ui", name = "ui" }
 androidx-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
 androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
