@@ -9,16 +9,10 @@ import org.threeten.bp.OffsetDateTime
 
 @Serializable
 data class CoinDataDto(
-    @SerialName("block_time_in_minutes")
-    val blockTimeInMinutes: Int,
     @SerialName("country_origin")
     val countryOrigin: String,
     @SerialName("description")
     val description: Description,
-    @SerialName("genesis_date")
-    val genesisDate: String,
-    @SerialName("hashing_algorithm")
-    val hashingAlgorithm: String,
     @SerialName("id")
     val id: String,
     @SerialName("image")
@@ -35,11 +29,7 @@ data class CoinDataDto(
     @SerialName("market_data")
     val marketData: MarketData,
     @SerialName("name")
-    val name: String,
-    @SerialName("preview_listing")
-    val previewListing: Boolean,
-    @SerialName("symbol")
-    val symbol: String
+    val name: String
 ) {
 
     //TODO needs to be improved BE side, giving just the the language choosen by user
@@ -308,11 +298,8 @@ data class CoinDataDto(
 
     fun toDomain(): CoinData {
         return CoinData(
-            blockTimeInMinutes = blockTimeInMinutes,
             countryOrigin = countryOrigin,
             description = description.toDomain(),
-            genesisDate = genesisDate,
-            hashingAlgorithm = hashingAlgorithm,
             id = id,
             image = image.toDomain(),
             lastUpdated = lastUpdated,
@@ -321,8 +308,6 @@ data class CoinDataDto(
             marketCapRank = marketCapRank,
             marketData = marketData.toDomain(),
             name = name,
-            previewListing = previewListing,
-            symbol = symbol,
             url = links.homepage.firstOrNull(),
         )
     }

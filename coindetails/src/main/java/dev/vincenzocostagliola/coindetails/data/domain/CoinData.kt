@@ -3,11 +3,8 @@ package dev.vincenzocostagliola.coindetails.data.domain
 import org.threeten.bp.OffsetDateTime
 
 data class CoinData(
-    val blockTimeInMinutes: Int,
     val countryOrigin: String,
     val description: Description,
-    val genesisDate: String,
-    val hashingAlgorithm: String,
     val id: String,
     val image: Image,
     val lastUpdated: OffsetDateTime,
@@ -16,8 +13,6 @@ data class CoinData(
     val marketCapRank: Int,
     val marketData: MarketData,
     val name: String,
-    val previewListing: Boolean,
-    val symbol: String,
     val url: String?
 ) {
     data class Description(
