@@ -1,12 +1,12 @@
-package dev.vincenzocostagliola.data.net.repository
+package dev.vincenzocostagliola.home.data.repository
 
 import com.skydoves.sandwich.suspendOnError
 import com.skydoves.sandwich.suspendOnException
 import com.skydoves.sandwich.suspendOnSuccess
-import dev.vincenzocostagliola.data.domain.result.GetCoinsResult
 import dev.vincenzocostagliola.data.error.ErrorManagement
 import dev.vincenzocostagliola.data.error.logErrorBasedOnCode
-import dev.vincenzocostagliola.data.net.service.CoinsService
+import dev.vincenzocostagliola.home.data.domain.result.GetCoinsResult
+import dev.vincenzocostagliola.home.data.service.CoinsService
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import timber.log.Timber

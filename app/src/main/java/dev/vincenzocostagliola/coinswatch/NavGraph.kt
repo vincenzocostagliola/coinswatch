@@ -8,12 +8,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import dev.vincenzocostagliola.coindetails.ui.DescriptionScreen
-import dev.vincenzocostagliola.coinswatch.home.HomeScreen
-import dev.vincenzocostagliola.coinswatch.home.HomeViewModel
+import dev.vincenzocostagliola.home.ui.HomeScreen
+import dev.vincenzocostagliola.home.ui.HomeViewModel
 import dev.vincenzocostagliola.data.navigation.NavigationRoute
 import dev.vincenzocostagliola.coindetails.ui.DetailsScreen
 import dev.vincenzocostagliola.coindetails.ui.DetailsScreenViewModel
-import dev.vincenzocostagliola.data.navigation.NavigationRoute.DescriptionScreen
 import timber.log.Timber
 import java.net.URLDecoder
 import java.nio.charset.StandardCharsets
@@ -48,7 +47,7 @@ fun NavGraph(navController: NavHostController) {
         }
 
         composable(
-            route = DescriptionScreen.route,
+            route = NavigationRoute.DescriptionScreen.route,
             arguments = listOf(navArgument(NavigationRoute.DescriptionScreen.argumentId) {
                 type = NavType.StringType
             })

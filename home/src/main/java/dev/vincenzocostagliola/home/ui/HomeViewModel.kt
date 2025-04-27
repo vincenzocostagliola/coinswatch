@@ -1,13 +1,14 @@
-package dev.vincenzocostagliola.coinswatch.home
+package dev.vincenzocostagliola.home.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dev.vincenzocostagliola.data.domain.Coin
-import dev.vincenzocostagliola.data.domain.result.GetCoinsResult
+import dev.vincenzocostagliola.home.data.domain.Coin
+import dev.vincenzocostagliola.home.data.domain.result.GetCoinsResult
 import dev.vincenzocostagliola.data.error.CoinSwatchError
 import dev.vincenzocostagliola.data.error.DialogAction
-import dev.vincenzocostagliola.data.net.repository.Repository
+import dev.vincenzocostagliola.designsystem.composables.CoinUi
+import dev.vincenzocostagliola.home.data.repository.Repository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -17,9 +18,11 @@ import timber.log.Timber
 import javax.inject.Inject
 
 
-sealed class HomeScreenState {
+internal sealed class HomeScreenState {
     data object Loading : HomeScreenState()
-    data class Success(val list: List<Coin>) : HomeScreenState()
+    data class Success(val list: List<CoinUi>) :
+        HomeScreenState()
+
     data class Error(val error: CoinSwatchError) : HomeScreenState()
 }
 
@@ -30,7 +33,7 @@ sealed class HomeScreenEvents {
 }
 
 @HiltViewModel
-internal class HomeViewModel @Inject constructor(
+class HomeViewModel @Inject internal constructor(
     private val repository: Repository
 ) : ViewModel() {
 
@@ -40,7 +43,7 @@ internal class HomeViewModel @Inject constructor(
 
     private val _homeScreenState: MutableStateFlow<HomeScreenState> =
         MutableStateFlow(HomeScreenState.Loading)
-    val homeScreenState: StateFlow<HomeScreenState>
+    internal val homeScreenState: StateFlow<HomeScreenState>
         get() = _homeScreenState
 
     fun sendEvent(event: HomeScreenEvents) {
@@ -86,9 +89,20 @@ internal class HomeViewModel @Inject constructor(
                 }
 
                 is GetCoinsResult.Success -> _homeScreenState.update {
-                    HomeScreenState.Success(result.coinList)
+                    HomeScreenState.Success(result.coinList.map { it.toCoinUi() })
                 }
             }
         }
+    }
+
+    private fun Coin.toCoinUi(): CoinUi {
+       return CoinUi(
+           currentPrice = currentPrice,
+           id = id,
+           image = image,
+           marketCap = marketCap,
+           marketCapRank = marketCapRank,
+           name = name
+       )
     }
 }

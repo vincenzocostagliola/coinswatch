@@ -8,9 +8,6 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import dev.vincenzocostagliola.data.error.ErrorManagement
 import dev.vincenzocostagliola.data.net.interceptor.ApiHeaderInterceptor
-import dev.vincenzocostagliola.data.net.repository.Repository
-import dev.vincenzocostagliola.data.net.repository.RepositoryImpl
-import dev.vincenzocostagliola.data.net.service.CoinsService
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
@@ -27,32 +24,16 @@ class DataModule {
 
     @Provides
     @Singleton
-    fun provideJson(): Json = Json {
+    internal fun provideJson(): Json = Json {
         encodeDefaults = true
         ignoreUnknownKeys = true
     }
 
-    @Provides
-    @Singleton
-    internal fun provideRepository(
-        coinsService: CoinsService,
-        errorManagement: ErrorManagement
-    ): Repository = RepositoryImpl(
-        coinsService = coinsService,
-        errorManagement = errorManagement
-    )
 
     @Provides
     @Singleton
     internal fun provideErrorManagement(): ErrorManagement {
         return ErrorManagement()
-    }
-
-    @Provides
-    @Singleton
-    fun provideCoinsService(retrofit: Retrofit): CoinsService {
-        return retrofit
-            .create(CoinsService::class.java)
     }
 
     @OptIn(ExperimentalSerializationApi::class)
@@ -92,7 +73,7 @@ class DataModule {
 
     @Provides
     @Singleton
-    fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
+    internal fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.BODY
         return interceptor

@@ -2,7 +2,6 @@ package dev.vincenzocostagliola.coindetails.data.repository
 
 import dev.vincenzocostagliola.coindetails.data.domain.result.GetCoinDataResult
 import dev.vincenzocostagliola.coindetails.data.domain.result.GetCoinHistoricalDataResult
-import dev.vincenzocostagliola.data.domain.result.GetCoinsResult
 import kotlinx.coroutines.flow.Flow
 
 internal interface CoinDataRepository {

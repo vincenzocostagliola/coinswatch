@@ -82,5 +82,6 @@ dependencies {
     /**MODULES*/
     implementation(project(":data"))
     implementation(project(":coindetails"))
+    implementation(project(":home"))
     implementation(project(":designsystem"))
 }

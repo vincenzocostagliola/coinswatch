@@ -1,4 +1,4 @@
-package dev.vincenzocostagliola.coinswatch.home
+package dev.vincenzocostagliola.home.ui
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -8,18 +8,18 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
-import dev.vincenzocostagliola.data.domain.Coin
 import dev.vincenzocostagliola.data.error.DialogAction
 import dev.vincenzocostagliola.data.error.ErrorResources
 import dev.vincenzocostagliola.data.navigation.NavigationRoute
 import dev.vincenzocostagliola.designsystem.composables.CoinShortInfoListItem
+import dev.vincenzocostagliola.designsystem.composables.CoinUi
 import dev.vincenzocostagliola.designsystem.composables.ErrorDialog
 import dev.vincenzocostagliola.designsystem.composables.Progress
 import dev.vincenzocostagliola.designsystem.values.Dimens
 import timber.log.Timber
 
 @Composable
-internal fun HomeScreen(viewModel: HomeViewModel, navigationController: NavHostController) {
+fun HomeScreen(viewModel: HomeViewModel, navigationController: NavHostController) {
 
     val state: State<HomeScreenState> = viewModel.homeScreenState.collectAsState()
     val viewState = state.value
@@ -55,7 +55,7 @@ private fun ShowError(newResources: ErrorResources, performAction: (DialogAction
 }
 
 @Composable
-private fun ShowCoinList(list: List<Coin>, onClick: (String) -> Unit) {
+private fun ShowCoinList(list: List<CoinUi>, onClick: (String) -> Unit) {
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
@@ -69,6 +69,9 @@ private fun ShowCoinList(list: List<Coin>, onClick: (String) -> Unit) {
         }
     }
 }
+
+
+
 /*
 @Preview(showBackground = true)
 @Composable

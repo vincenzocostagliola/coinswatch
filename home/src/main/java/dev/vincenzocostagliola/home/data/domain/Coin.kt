@@ -1,6 +1,6 @@
-package dev.vincenzocostagliola.data.domain
+package dev.vincenzocostagliola.home.data.domain
 
-data class Coin(
+internal data class Coin(
     val ath: Double,
     val athChangePercentage: Double,
     val athDate: String,

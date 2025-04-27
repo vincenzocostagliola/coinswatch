@@ -1,7 +1,7 @@
-package dev.vincenzocostagliola.data.dto
+package dev.vincenzocostagliola.home.data.dto
 
 
-import dev.vincenzocostagliola.data.domain.Coin
+import dev.vincenzocostagliola.home.data.domain.Coin
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -39,7 +39,7 @@ import kotlinx.serialization.Serializable
  */
 
 @Serializable
-data class CoinDto(
+internal data class CoinDto(
     @SerialName("ath")
     val ath: Double,
     @SerialName("ath_change_percentage")
