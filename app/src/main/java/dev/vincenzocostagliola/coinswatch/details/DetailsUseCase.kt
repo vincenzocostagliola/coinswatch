@@ -3,6 +3,7 @@ package dev.vincenzocostagliola.coinswatch.details
 import androidx.compose.ui.text.intl.Locale
 import dev.vincenzocostagliola.data.domain.CoinData
 import dev.vincenzocostagliola.data.domain.CoinData.Image
+import dev.vincenzocostagliola.data.domain.CoinHistoricalData
 import dev.vincenzocostagliola.data.domain.result.GetCoinDataResult
 import dev.vincenzocostagliola.data.domain.result.GetCoinDataResult.Failure
 import dev.vincenzocostagliola.data.domain.result.GetCoinHistoricalDataResult
@@ -10,6 +11,8 @@ import dev.vincenzocostagliola.data.error.CoinSwatchError
 import dev.vincenzocostagliola.data.error.ErrorManagement
 import dev.vincenzocostagliola.data.net.repository.Repository
 import dev.vincenzocostagliola.designsystem.utils.formatPriceAsEuro
+import dev.vincenzocostagliola.designsystem.utils.formatPricesAsEuro
+import dev.vincenzocostagliola.designsystem.utils.getSignificantPrices
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
@@ -21,7 +24,7 @@ import javax.inject.Inject
 sealed class CoinDataWithHistoryResult {
 
     data class CoinDataWithHistory(
-        val history: List<CoinHistory>,
+        val history: CoinHistory,
         val marketCapRank: Int,
         val name: String,
         val id: String,
@@ -66,13 +69,7 @@ internal class DetailsUseCase @Inject constructor(
         coinData: GetCoinDataResult.Success
     ): CoinDataWithHistoryResult.CoinDataWithHistory =
         CoinDataWithHistoryResult.CoinDataWithHistory(
-            history = coinHistory.coinData.prices.sortedByDescending { it.date }.map {
-                CoinHistory(
-                    chartPrice = it.value.toFloat(),
-                    date = it.date,
-                    significantPrices = it.value.toFloat()
-                )
-            },
+            history = createCoinHistory(coinHistory.coinData),
             marketCapRank = coinData.coinData.marketCapRank,
             name = coinData.coinData.name,
             id = coinData.coinData.id,
@@ -81,6 +78,18 @@ internal class DetailsUseCase @Inject constructor(
             url = coinData.coinData.url
 
         )
+
+    private fun createCoinHistory(
+        history: CoinHistoricalData): CoinHistory {
+        return CoinHistory(
+            chartPricesPoints = history.prices.map { it.value.toFloat() },
+            chartDates = history.prices.map { it.date }.distinctBy { it.toLocalDate() },
+            chartFormattedPrices = history.prices.map { it.value.toFloat() }
+                .getSignificantPrices()
+                .sortedDescending()
+                .formatPricesAsEuro()
+        )
+    }
 
     private fun manageFailure(
         coinHistory: GetCoinHistoricalDataResult,

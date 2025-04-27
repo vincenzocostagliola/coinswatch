@@ -122,22 +122,15 @@ private fun ShowDetails(
 }
 
 @Composable
-fun ShowChart(history: List<CoinHistory>) {
-    val chartPricesPoints: List<Float> = history.map { it.chartPrice }
-    val chartDates: List<OffsetDateTime> = history.map { it.date }.distinctBy { it.toLocalDate() }
-    val chartFormattedPrices: List<String> = history.map { it.significantPrices }
-        .getSignificantPrices()
-        .sortedDescending()
-        .formatPricesAsEuro()
-
-    Timber.d("ChartComposable - prices: $chartPricesPoints")
-    Timber.d("ChartComposable - datesList: $chartDates")
-    Timber.d("ChartComposable - chartFormattedPrices: $chartFormattedPrices")
+fun ShowChart(history: CoinHistory) {
+    Timber.d("ChartComposable - prices: ${history.chartPricesPoints}")
+    Timber.d("ChartComposable - datesList: ${history.chartDates}")
+    Timber.d("ChartComposable - chartFormattedPrices: ${history.chartFormattedPrices}")
 
     Chart(
-        chartPricesPoints = chartPricesPoints,
-        chartDates = chartDates,
-        chartFormattedPrices = chartFormattedPrices
+        chartPricesPoints = history.chartPricesPoints,
+        chartDates = history.chartDates,
+        chartFormattedPrices = history.chartFormattedPrices
     )
 }
 

@@ -56,7 +56,7 @@ fun Chart(
         Row(
             modifier = modifier
                 .fillMaxWidth()
-                .padding(top = Regular),
+                .padding(top = Regular, start = 50.dp),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             chartDates.forEach {
