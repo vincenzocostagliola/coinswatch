@@ -78,7 +78,9 @@ fun ErrorDialog(errorResources: ErrorResources, performAction: (DialogAction) ->
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         Box(
-                            modifier = Modifier.size(48.dp).background(Pink80, CircleShape),
+                            modifier = Modifier
+                                .size(48.dp)
+                                .background(Pink80, CircleShape),
                             contentAlignment = Alignment.Center
                         ) {
                             Image(
@@ -107,7 +109,10 @@ fun ErrorDialog(errorResources: ErrorResources, performAction: (DialogAction) ->
                             Box(
                                 Modifier
                                     .clip(RoundedCornerShape(buttonCornerShape))
-                                    .clickable(role = Role.Button) { }
+                                    .clickable(role = Role.Button) {
+                                        openDialog.value = false
+                                        performAction(secondaryAction)
+                                    }
                                     .padding(horizontal = 14.dp, vertical = 10.dp),
                                 contentAlignment = Alignment.Center
                             ) {

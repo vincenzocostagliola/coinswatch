@@ -18,6 +18,7 @@ internal sealed class DetailsScreenState {
     data object Loading : DetailsScreenState()
     data class Success(val data: CoinDataWithHistory) : DetailsScreenState()
     data class Error(val error: CoinSwatchError) : DetailsScreenState()
+    data object GoBack : DetailsScreenState()
 }
 
 internal sealed class DetailsScreenEvents {
@@ -43,6 +44,8 @@ internal class DetailsScreenViewModel @Inject constructor(
         get() = _detailsScreenState
 
     fun sendEvent(event: DetailsScreenEvents) {
+        Timber.d("DetailsScreen - DetailsScreenEvents: $event")
+
         viewModelScope.launch() {
             when (event) {
                 is DetailsScreenEvents.GetCoinData -> getCoinDataWithHistory(event.coinId)
@@ -53,7 +56,9 @@ internal class DetailsScreenViewModel @Inject constructor(
 
     private suspend fun performDialogAction(action: DialogAction) {
         when (action) {
-            DialogAction.Leave -> Unit
+            DialogAction.Leave -> {
+                _detailsScreenState.update { DetailsScreenState.GoBack }
+            }
             DialogAction.Quit -> {
                 // Perform a logout if signed or go out from the app
                 Unit

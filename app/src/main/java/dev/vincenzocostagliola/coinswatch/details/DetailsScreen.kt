@@ -23,6 +23,7 @@ import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import dev.vincenzocostagliola.coinswatch.NavigationRoute
 import dev.vincenzocostagliola.coinswatch.R
+import dev.vincenzocostagliola.coinswatch.details.DetailsScreenEvents.*
 import dev.vincenzocostagliola.data.error.DialogAction
 import dev.vincenzocostagliola.data.error.ErrorResources
 import dev.vincenzocostagliola.designsystem.composables.Chart
@@ -52,21 +53,28 @@ internal fun DetailsScreen(
     }
 
     val state: State<DetailsScreenState> = viewModel.detailsScreenState.collectAsState()
-    when (val viewState = state.value) {
+    val viewState = state.value
+    Timber.d("DetailsScreen - ViewState: $viewState")
+
+    when (viewState) {
         is DetailsScreenState.Error -> {
             ShowError(viewState.error.newResources) {
-                viewModel.sendEvent(DetailsScreenEvents.PerformDialogAction(it))
+                viewModel.sendEvent(PerformDialogAction(it))
             }
         }
 
         DetailsScreenState.Loading -> {
             Progress(true)
-            viewModel.sendEvent(DetailsScreenEvents.GetCoinData(coinId))
+            viewModel.sendEvent(GetCoinData(coinId))
         }
 
         is DetailsScreenState.Success -> {
             Progress(false)
             ShowDetails(viewState.data, onBackPressed, goToDescription)
+        }
+
+        DetailsScreenState.GoBack -> {
+            navigationController.popBackStack()
         }
     }
 }
