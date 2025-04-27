@@ -36,6 +36,8 @@ import dev.vincenzocostagliola.designsystem.theme.ExtraLight
 import dev.vincenzocostagliola.designsystem.values.Dimens
 import dev.vincenzocostagliola.designsystem.values.Dimens.iconDimensLarge
 import timber.log.Timber
+import java.net.URLEncoder
+import java.nio.charset.StandardCharsets
 
 
 @Composable
@@ -47,7 +49,9 @@ internal fun DetailsScreen(
 ) {
     val goToDescription: (String) -> Unit = { description ->
         Timber.d("Description Navigation - sent")
-        navigationController.navigate(NavigationRoute.DescriptionScreen.createRoute(description))
+        val encodedText = URLEncoder.encode(description, StandardCharsets.UTF_8.toString())
+
+        navigationController.navigate(NavigationRoute.DescriptionScreen.createRoute(encodedText))
     }
 
     val state: State<DetailsScreenState> = viewModel.detailsScreenState.collectAsState()

@@ -14,6 +14,8 @@ import dev.vincenzocostagliola.coinswatch.details.DetailsScreenViewModel
 import dev.vincenzocostagliola.coinswatch.home.HomeScreen
 import dev.vincenzocostagliola.coinswatch.home.HomeViewModel
 import timber.log.Timber
+import java.net.URLDecoder
+import java.nio.charset.StandardCharsets
 
 
 sealed class NavigationRoute() {
@@ -55,6 +57,7 @@ fun NavGraph(navController: NavHostController) {
         ) { backStackEntry ->
             val coinId =
                 backStackEntry.arguments?.getString(NavigationRoute.DetailsScreen.argumentId)
+
             Timber.d("Navigation - received coinId = $coinId")
             val viewModel = hiltViewModel<DetailsScreenViewModel>()
             val onBackPressed: () -> Unit = { navController.popBackStack() }
@@ -73,7 +76,9 @@ fun NavGraph(navController: NavHostController) {
             })
         ) { backStackEntry ->
             val description =
-                backStackEntry.arguments?.getString(DescriptionScreen.argumentId) ?: ""
+                backStackEntry.arguments?.getString(DescriptionScreen.argumentId)?.let {
+                    URLDecoder.decode(it, StandardCharsets.UTF_8.toString())
+                } ?: ""
             Timber.d("Navigation - received Description = $description")
 
             val onBackPressed: () -> Unit = { navController.popBackStack() }
