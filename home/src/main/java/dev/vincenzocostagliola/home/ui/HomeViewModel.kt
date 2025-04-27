@@ -40,11 +40,14 @@ class HomeViewModel @Inject internal constructor(
     private val howManyCoins = 10
     private val currency = "eur"
 
-
     private val _homeScreenState: MutableStateFlow<HomeScreenState> =
         MutableStateFlow(HomeScreenState.Loading)
     internal val homeScreenState: StateFlow<HomeScreenState>
         get() = _homeScreenState
+
+    init {
+        sendEvent(HomeScreenEvents.GetCoinsData)
+    }
 
     fun sendEvent(event: HomeScreenEvents) {
         Timber.d("HomeScreen - HomeScreenEvents: $event")
@@ -96,13 +99,13 @@ class HomeViewModel @Inject internal constructor(
     }
 
     private fun Coin.toCoinUi(): CoinUi {
-       return CoinUi(
-           currentPrice = currentPrice,
-           id = id,
-           image = image,
-           marketCap = marketCap,
-           marketCapRank = marketCapRank,
-           name = name
-       )
+        return CoinUi(
+            currentPrice = currentPrice,
+            id = id,
+            image = image,
+            marketCap = marketCap,
+            marketCapRank = marketCapRank,
+            name = name
+        )
     }
 }
