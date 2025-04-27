@@ -22,6 +22,8 @@ CoinSWatch is a modern Android app built with **Jetpack Compose** that allows us
 ## 📦 Project Structure
 
 ```
+```
+
 CoinSWatch/
 ├── app/                # Main application module (screens, navigation)
 │   ├── details/        # Crypto details screen (description, prices, etc.)
@@ -50,6 +52,11 @@ CoinSWatch/
 └── build.gradle        # Gradle build scripts
 
 ---
+---
+
+## 📦 Project Structure
+
+```
 
 ## 🔀 Navigation Flow
 
