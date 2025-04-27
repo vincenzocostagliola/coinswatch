@@ -1,4 +1,4 @@
-package dev.vincenzocostagliola.data.domain
+package dev.vincenzocostagliola.coindetails.data.domain
 
 
 import org.threeten.bp.OffsetDateTime

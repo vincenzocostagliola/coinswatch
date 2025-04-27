@@ -27,7 +27,7 @@ import javax.inject.Inject
 }
 
 @HiltViewModel
-class DetailsScreenViewModel @Inject constructor(
+class DetailsScreenViewModel @Inject internal constructor(
     private val useCase: DetailsUseCase
 ) : ViewModel() {
 

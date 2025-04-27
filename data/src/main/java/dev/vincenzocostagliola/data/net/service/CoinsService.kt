@@ -1,9 +1,7 @@
 package dev.vincenzocostagliola.data.net.service
 
 import com.skydoves.sandwich.ApiResponse
-import dev.vincenzocostagliola.data.dto.CoinDataDto
 import dev.vincenzocostagliola.data.dto.CoinDto
-import dev.vincenzocostagliola.data.dto.CoinHistoricalDataDto
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

@@ -1,9 +1,9 @@
-package dev.vincenzocostagliola.data.dto
+package dev.vincenzocostagliola.coindetails.data.dto
 
 
-import dev.vincenzocostagliola.data.domain.CoinHistoricalData
+import dev.vincenzocostagliola.coindetails.data.domain.CoinHistoricalData
+import dev.vincenzocostagliola.coindetails.data.serializer.PriceChartPointListSerializer
 import dev.vincenzocostagliola.data.net.serializer.OffsetDateTimeSerializer
-import dev.vincenzocostagliola.data.net.serializer.PriceChartPointListSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.threeten.bp.OffsetDateTime

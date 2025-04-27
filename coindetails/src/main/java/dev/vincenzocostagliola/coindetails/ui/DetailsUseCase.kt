@@ -1,13 +1,12 @@
 package dev.vincenzocostagliola.coindetails.ui
 
 import androidx.compose.ui.text.intl.Locale
+import dev.vincenzocostagliola.coindetails.data.domain.CoinData
+import dev.vincenzocostagliola.coindetails.data.domain.CoinData.Image
+import dev.vincenzocostagliola.coindetails.data.domain.CoinHistoricalData
+import dev.vincenzocostagliola.coindetails.data.domain.result.GetCoinDataResult
+import dev.vincenzocostagliola.coindetails.data.domain.result.GetCoinHistoricalDataResult
 import dev.vincenzocostagliola.coindetails.data.repository.CoinDataRepository
-import dev.vincenzocostagliola.data.domain.CoinData
-import dev.vincenzocostagliola.data.domain.CoinData.Image
-import dev.vincenzocostagliola.data.domain.CoinHistoricalData
-import dev.vincenzocostagliola.data.domain.result.GetCoinDataResult
-import dev.vincenzocostagliola.data.domain.result.GetCoinDataResult.Failure
-import dev.vincenzocostagliola.data.domain.result.GetCoinHistoricalDataResult
 import dev.vincenzocostagliola.data.error.CoinSwatchError
 import dev.vincenzocostagliola.data.error.ErrorManagement
 import dev.vincenzocostagliola.designsystem.utils.formatPricesAsEuro
@@ -35,7 +34,7 @@ sealed class CoinDataWithHistoryResult {
     data class Error(val error: CoinSwatchError) : CoinDataWithHistoryResult()
 }
 
- class DetailsUseCase @Inject constructor(
+ internal class DetailsUseCase @Inject constructor(
     private val repository: CoinDataRepository,
     private val errorManagement: ErrorManagement
 ) {
@@ -99,7 +98,7 @@ sealed class CoinDataWithHistoryResult {
             CoinDataWithHistoryResult.Error(coinHistory.error)
         }
 
-        coinData is Failure -> {
+        coinData is GetCoinDataResult.Failure -> {
             Timber.e("getCoinDataWithHistory - coinData.error: ${coinData.error}")
             CoinDataWithHistoryResult.Error(coinData.error)
         }

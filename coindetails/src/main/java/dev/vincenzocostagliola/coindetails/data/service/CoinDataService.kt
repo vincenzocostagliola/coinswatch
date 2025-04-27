@@ -1,13 +1,13 @@
 package dev.vincenzocostagliola.coindetails.data.service
 
 import com.skydoves.sandwich.ApiResponse
-import dev.vincenzocostagliola.data.dto.CoinDataDto
-import dev.vincenzocostagliola.data.dto.CoinHistoricalDataDto
+import dev.vincenzocostagliola.coindetails.data.dto.CoinDataDto
+import dev.vincenzocostagliola.coindetails.data.dto.CoinHistoricalDataDto
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface CoinDataService {
+internal interface CoinDataService {
     /*---COIN data---*/
     @GET("coins/{id}")
     suspend fun getCoinData(@Path("id") coinId: String): ApiResponse<CoinDataDto>

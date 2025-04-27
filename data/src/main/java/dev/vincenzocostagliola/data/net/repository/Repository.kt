@@ -1,7 +1,5 @@
 package dev.vincenzocostagliola.data.net.repository
 
-import dev.vincenzocostagliola.data.domain.result.GetCoinDataResult
-import dev.vincenzocostagliola.data.domain.result.GetCoinHistoricalDataResult
 import dev.vincenzocostagliola.data.domain.result.GetCoinsResult
 import kotlinx.coroutines.flow.Flow
 

@@ -3,9 +3,9 @@ package dev.vincenzocostagliola.coindetails.data.repository
 import com.skydoves.sandwich.suspendOnError
 import com.skydoves.sandwich.suspendOnException
 import com.skydoves.sandwich.suspendOnSuccess
+import dev.vincenzocostagliola.coindetails.data.domain.result.GetCoinDataResult
+import dev.vincenzocostagliola.coindetails.data.domain.result.GetCoinHistoricalDataResult
 import dev.vincenzocostagliola.coindetails.data.service.CoinDataService
-import dev.vincenzocostagliola.data.domain.result.GetCoinDataResult
-import dev.vincenzocostagliola.data.domain.result.GetCoinHistoricalDataResult
 import dev.vincenzocostagliola.data.error.ErrorManagement
 import dev.vincenzocostagliola.data.error.logErrorBasedOnCode
 import kotlinx.coroutines.flow.Flow

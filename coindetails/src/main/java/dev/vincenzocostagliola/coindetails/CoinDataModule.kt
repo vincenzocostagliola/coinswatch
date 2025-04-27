@@ -14,10 +14,10 @@ import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
 @Module
-class CoinDataModule {
+internal class CoinDataModule {
     @Provides
     @Singleton
-    fun provideCoinDataService(retrofit: Retrofit): CoinDataService {
+    internal fun provideCoinDataService(retrofit: Retrofit): CoinDataService {
         return retrofit
             .create(CoinDataService::class.java)
     }

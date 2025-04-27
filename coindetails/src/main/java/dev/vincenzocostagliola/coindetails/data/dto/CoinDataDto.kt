@@ -1,7 +1,7 @@
-package dev.vincenzocostagliola.data.dto
+package dev.vincenzocostagliola.coindetails.data.dto
 
 
-import dev.vincenzocostagliola.data.domain.CoinData
+import dev.vincenzocostagliola.coindetails.data.domain.CoinData
 import dev.vincenzocostagliola.data.net.serializer.OffsetDateTimeSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

@@ -1,6 +1,6 @@
-package dev.vincenzocostagliola.data.net.serializer
+package dev.vincenzocostagliola.coindetails.data.serializer
 
-import dev.vincenzocostagliola.data.dto.CoinHistoricalDataDto.PriceChartPointDto
+import dev.vincenzocostagliola.coindetails.data.dto.CoinHistoricalDataDto.PriceChartPointDto
 import kotlinx.serialization.InternalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
@@ -27,7 +27,7 @@ private data class PricePointSurrogate(
     val price: Double
 )
 
-class PriceChartPointListSerializer : KSerializer<List<PriceChartPointDto>> {
+internal class PriceChartPointListSerializer : KSerializer<List<PriceChartPointDto>> {
     @OptIn(InternalSerializationApi::class)
     override val descriptor: SerialDescriptor =
         ListSerializer(PricePointSurrogate::class.serializer()).descriptor

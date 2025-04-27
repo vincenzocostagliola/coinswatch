@@ -1,6 +1,6 @@
-package dev.vincenzocostagliola.data.domain.result
+package dev.vincenzocostagliola.coindetails.data.domain.result
 
-import dev.vincenzocostagliola.data.domain.CoinHistoricalData
+import dev.vincenzocostagliola.coindetails.data.domain.CoinHistoricalData
 import dev.vincenzocostagliola.data.error.CoinSwatchError
 
 sealed class GetCoinHistoricalDataResult {
