@@ -34,8 +34,13 @@ dependencies {
     implementation (libs.hilt)
     ksp(libs.hilt.compiler)
     implementation(libs.timber)
-    implementation(libs.threeTen)
+    /**SERIALIZATION*/
+    implementation(libs.kotlin.serialization)
 
+    /**DATE TIME*/
+    implementation(libs.threeTen)
+    /**NETWORK*/
+    implementation(libs.bundles.network)
     /**MODULES*/
     implementation(project(":data"))
     implementation(project(":designsystem"))

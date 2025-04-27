@@ -1,6 +1,7 @@
 package dev.vincenzocostagliola.coindetails.ui
 
 import androidx.compose.ui.text.intl.Locale
+import dev.vincenzocostagliola.coindetails.data.repository.CoinDataRepository
 import dev.vincenzocostagliola.data.domain.CoinData
 import dev.vincenzocostagliola.data.domain.CoinData.Image
 import dev.vincenzocostagliola.data.domain.CoinHistoricalData
@@ -9,7 +10,6 @@ import dev.vincenzocostagliola.data.domain.result.GetCoinDataResult.Failure
 import dev.vincenzocostagliola.data.domain.result.GetCoinHistoricalDataResult
 import dev.vincenzocostagliola.data.error.CoinSwatchError
 import dev.vincenzocostagliola.data.error.ErrorManagement
-import dev.vincenzocostagliola.data.net.repository.Repository
 import dev.vincenzocostagliola.designsystem.utils.formatPricesAsEuro
 import dev.vincenzocostagliola.designsystem.utils.getSignificantPrices
 import kotlinx.coroutines.Dispatchers
@@ -36,7 +36,7 @@ sealed class CoinDataWithHistoryResult {
 }
 
  class DetailsUseCase @Inject constructor(
-    private val repository: Repository,
+    private val repository: CoinDataRepository,
     private val errorManagement: ErrorManagement
 ) {
 

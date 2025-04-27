@@ -7,10 +7,4 @@ import kotlinx.coroutines.flow.Flow
 
 interface Repository {
     suspend fun getCoinsWithMarketData(currency: String, howManyCoins: Int): Flow<GetCoinsResult>
-    suspend fun getCoinData(coinId : String) : Flow<GetCoinDataResult>
-    suspend fun getCoinHistoricalData(
-        coinId: String,
-        currency: String,
-        days: Int
-    ): Flow<GetCoinHistoricalDataResult>
 }

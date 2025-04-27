@@ -10,7 +10,6 @@ import dev.vincenzocostagliola.data.error.ErrorManagement
 import dev.vincenzocostagliola.data.net.interceptor.ApiHeaderInterceptor
 import dev.vincenzocostagliola.data.net.repository.Repository
 import dev.vincenzocostagliola.data.net.repository.RepositoryImpl
-import dev.vincenzocostagliola.data.net.service.CoinDataService
 import dev.vincenzocostagliola.data.net.service.CoinsService
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
@@ -37,12 +36,10 @@ class DataModule {
     @Singleton
     internal fun provideRepository(
         coinsService: CoinsService,
-       coinDataService: CoinDataService,
         errorManagement: ErrorManagement
     ): Repository = RepositoryImpl(
         coinsService = coinsService,
-        errorManagement = errorManagement,
-        coinDataService = coinDataService
+        errorManagement = errorManagement
     )
 
     @Provides
@@ -57,14 +54,6 @@ class DataModule {
         return retrofit
             .create(CoinsService::class.java)
     }
-
-    @Provides
-    @Singleton
-    fun provideCoinDataService(retrofit: Retrofit): CoinDataService {
-        return retrofit
-            .create(CoinDataService::class.java)
-    }
-
 
     @OptIn(ExperimentalSerializationApi::class)
     @Provides

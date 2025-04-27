@@ -1,4 +1,4 @@
-package dev.vincenzocostagliola.data.net.service
+package dev.vincenzocostagliola.coindetails.data.service
 
 import com.skydoves.sandwich.ApiResponse
 import dev.vincenzocostagliola.data.dto.CoinDataDto
