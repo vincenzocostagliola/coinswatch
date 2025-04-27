@@ -8,13 +8,15 @@ import dev.vincenzocostagliola.data.domain.result.GetCoinHistoricalDataResult
 import dev.vincenzocostagliola.data.error.ErrorManagement
 import dev.vincenzocostagliola.data.domain.result.GetCoinsResult
 import dev.vincenzocostagliola.data.error.logErrorBasedOnCode
+import dev.vincenzocostagliola.data.net.service.CoinDataService
 import dev.vincenzocostagliola.data.net.service.CoinsService
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import timber.log.Timber
 
 internal class RepositoryImpl(
-    private val service: CoinsService,
+    private val coinsService: CoinsService,
+    private val coinDataService: CoinDataService,
     private val errorManagement: ErrorManagement
 ) : Repository {
 
@@ -23,7 +25,7 @@ internal class RepositoryImpl(
         howManyCoins: Int
     ): Flow<GetCoinsResult> {
         return flow {
-            val response = service.getCoinsWithMarketData(currency)
+            val response = coinsService.getCoinsWithMarketData(currency)
 
             response.suspendOnSuccess {
                 //TODO possibly save last update date and data in persistence
@@ -47,7 +49,7 @@ internal class RepositoryImpl(
 
     override suspend fun getCoinData(coinId: String): Flow<GetCoinDataResult> {
         return flow {
-            val response = service.getCoinData(coinId)
+            val response = coinDataService.getCoinData(coinId)
 
             response.suspendOnSuccess {
                 emit(GetCoinDataResult.Success(data.toDomain()))
@@ -72,7 +74,7 @@ internal class RepositoryImpl(
         days: Int
     ): Flow<GetCoinHistoricalDataResult> {
         return flow {
-            val response = service.getCoinHistoricalData(
+            val response = coinDataService.getCoinHistoricalData(
                 coinId = coinId,
                 currency = currency,
                 days = days
