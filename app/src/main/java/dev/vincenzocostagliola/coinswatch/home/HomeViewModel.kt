@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 
@@ -43,9 +44,10 @@ internal class HomeViewModel @Inject constructor(
         get() = _homeScreenState
 
     fun sendEvent(event: HomeScreenEvents) {
+        Timber.d("HomeScreen - HomeScreenEvents: $event")
         viewModelScope.launch() {
             when (event) {
-                HomeScreenEvents.GetCoinsData -> getCoinsWithMarketData()
+                is HomeScreenEvents.GetCoinsData -> getCoinsWithMarketData()
                 is HomeScreenEvents.PerformDialogAction -> performDialogAction(event.dialogAction)
             }
         }
@@ -53,7 +55,7 @@ internal class HomeViewModel @Inject constructor(
 
     private suspend fun performDialogAction(action: DialogAction) {
         when (action) {
-            DialogAction.Leave -> Unit
+            DialogAction.Leave -> Unit //TBD
             DialogAction.Quit -> {
                 // Perform a logout if signed or go out from the app
                 Unit

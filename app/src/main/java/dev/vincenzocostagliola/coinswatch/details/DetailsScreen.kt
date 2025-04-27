@@ -23,7 +23,8 @@ import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import dev.vincenzocostagliola.coinswatch.NavigationRoute
 import dev.vincenzocostagliola.coinswatch.R
-import dev.vincenzocostagliola.coinswatch.details.DetailsScreenEvents.*
+import dev.vincenzocostagliola.coinswatch.details.DetailsScreenEvents.GetCoinData
+import dev.vincenzocostagliola.coinswatch.details.DetailsScreenEvents.PerformDialogAction
 import dev.vincenzocostagliola.data.error.DialogAction
 import dev.vincenzocostagliola.data.error.ErrorResources
 import dev.vincenzocostagliola.designsystem.composables.Chart
@@ -32,11 +33,8 @@ import dev.vincenzocostagliola.designsystem.composables.NavigationListItem
 import dev.vincenzocostagliola.designsystem.composables.Progress
 import dev.vincenzocostagliola.designsystem.composables.TopBar
 import dev.vincenzocostagliola.designsystem.theme.ExtraLight
-import dev.vincenzocostagliola.designsystem.utils.formatPricesAsEuro
-import dev.vincenzocostagliola.designsystem.utils.getSignificantPrices
 import dev.vincenzocostagliola.designsystem.values.Dimens
 import dev.vincenzocostagliola.designsystem.values.Dimens.iconDimensLarge
-import org.threeten.bp.OffsetDateTime
 import timber.log.Timber
 
 

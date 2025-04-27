@@ -22,7 +22,10 @@ import timber.log.Timber
 internal fun HomeScreen(viewModel: HomeViewModel, navigationController: NavHostController) {
 
     val state: State<HomeScreenState> = viewModel.homeScreenState.collectAsState()
-    when (val viewState = state.value) {
+    val viewState = state.value
+    Timber.d("HomeScreen - ViewState: $viewState")
+
+    when (viewState) {
         is HomeScreenState.Error -> {
             ShowError(viewState.error.newResources) {
                 viewModel.sendEvent(HomeScreenEvents.PerformDialogAction(it))
