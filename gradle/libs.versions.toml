@@ -16,7 +16,7 @@ dagger_hilt = "2.51.1"
 timber = "5.0.1"
 threeTen = "1.6.1"
 #Network
-retrofit = "2.9.0"
+retrofit = "2.11.0"
 okhttp = "4.10.0"
 kspVersion = "2.0.21-1.0.28"
 kotlinSerializationConverter = "0.8.0"
