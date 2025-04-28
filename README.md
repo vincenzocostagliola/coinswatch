@@ -26,7 +26,6 @@ CoinSWatch is a modern Android app built with **Jetpack Compose** that allows us
 CoinSWatch/
 ├── app/                # Main application module (screens, navigation)
 │   ├── details/        # Crypto details screen (description, prices, etc.)
-│   ├── home/           # Home screen showing the top 10 crypto list
 │   ├── CoinSwatchApplication.kt  # Hilt Application class
 │   ├── LoggingSetup.kt           # Timber (and Sentry tbd) logger setup
 │   ├── MainActivity.kt           # App launcher and container
@@ -34,19 +33,28 @@ CoinSWatch/
 │
 ├── data/               # Data module (domain models, network, error handling)
 │   ├── DataModule.kt   # Hilt module for providing data dependencies
-│   │
-│   ├── domain/         # Domain models (pure app logic)
-│   │
-│   ├── dto/            # Data Transfer Objects for API
-│   │
-│   ├── error/          # Error handling system
-│   │
+│   ├── error/          # Error handling system 
+│   ├── navigation/     # Navigation routes
 │   └── net/            # Networking layer
 │
 ├── designsystem/       # UI styles, components, theming
 │   ├── theme/          # Colors, Typography, Shapes
 │   ├── composables/    # Custom Compose UI components
 │   └── values/         # Custom values for composables
+│
+├── home/               # Home feature
+│   ├── ui/             # Feature ui layer - showing the top 10 crypto list
+│   ├── domain/         # Domain models (pure app logic)
+│   ├── dto/            # Data Transfer Objects for API
+│   ├── repository/      # Repository interface and implementation
+│   └── service/         # API service interface
+│
+├── coindetails/        # Coin Details feature
+│   ├── ui/             # Feature ui layer - showing the top 10 crypto list
+│   ├── domain/         # Domain models (pure app logic)
+│   ├── dto/            # Data Transfer Objects for API
+│   ├── repository/      # Repository interface and implementation
+│   └── service/         # API service interface
 │
 └── build.gradle        # Gradle build scripts
 
