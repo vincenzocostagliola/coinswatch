@@ -3,7 +3,7 @@
 
 # CoinSWatch 📈
 
-[![Made with Kotlin](https://img.shields.io/badge/Kotlin-1.9.0-blueviolet?logo=kotlin&logoColor=white)](https://kotlinlang.org/)  
+[![Made with Kotlin](https://img.shields.io/badge/Kotlin-2.0.21-blueviolet?logo=kotlin&logoColor=white)](https://kotlinlang.org/)  
 [![Jetpack Compose](https://img.shields.io/badge/Jetpack%20Compose-Enabled-brightgreen?logo=android)](https://developer.android.com/jetpack/compose)  
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
